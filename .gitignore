@@ -2,15 +2,91 @@
 .godot/
 .nomedia
 
-# Godot-specific ignores
+# Godot 3 fallback ignores
 .import/
 export.cfg
 export_credentials.cfg
+override.cfg
 
-# Imported translations (automatically generated from CSV files)
+# Auto-generated translation binaries
 *.translation
 
-# Mono-specific ignores
-.mono/
-data_*/
-mono_crash.*.json
+# Raw source artwork — Photoshop
+*.psb
+*.psd
+
+# Raw source artwork — Krita
+*.kra
+*.kra~
+*.~kra
+
+# Raw source artwork — Aseprite
+*.ase
+*.aseprite
+
+# Raw source 3D — Blender
+*.blend
+*.blend[0-9]*
+
+# Raw source textures — Substance Painter
+*.sbsar
+*.spp
+*.spsm
+
+# Raw audio projects — Cakewalk Sonar
+*.cwb
+*.cwp
+
+# Build artefacts
+build/
+exports/
+*.app/
+*.dmg
+*.exe
+*.pck
+*.x86
+*.x86_64
+
+# Temporary files and logs
+*.bak
+*.dmp
+*.log
+*.old
+*.tmp
+
+# Secrets and local environment overrides
+.env
+.env.*
+*.secret
+
+# VSCode
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# Xcode
+xcuserdata/
+
+# Vim and Neovim
+Session.vim
+*.swn
+*.swo
+*.swp
+*~
+[._]*.un~
+
+# Linux filesystem artefacts
+.directory
+.[Tt]rash-*
+
+# macOS filesystem artefacts
+__MACOSX/
+.AppleDouble
+.DS_Store
+.Trashes
+
+# Windows filesystem artefacts
+$RECYCLE.BIN/
+[Dd]esktop.ini
+Thumbs.db
