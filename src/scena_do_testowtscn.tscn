@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5tju32jxsgwa"]
+
+[ext_resource type="Texture2D" uid="uid://b24id8fkx5ix" path="res://icon.svg" id="1_fee7y"]
+[ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://gracz.tscn" id="2_mfvkk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mfvkk"]
+size = Vector2(520, 42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fee7y"]
+size = Vector2(56.5, 53.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l4qke"]
+size = Vector2(269.6875, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s32r2"]
+size = Vector2(115.5, 48)
+
+[node name="Scena" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(432.5, 309.75)
+scale = Vector2(4.039063, 0.30078137)
+texture = ExtResource("1_fee7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(430, 310)
+shape = SubResource("RectangleShape2D_mfvkk")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(286.25, 178)
+scale = Vector2(0.4492186, 0.421875)
+texture = ExtResource("1_fee7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(286.75, 177.75)
+shape = SubResource("RectangleShape2D_fee7y")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(554, 264.00003)
+scale = Vector2(2.1093748, 0.38281253)
+texture = ExtResource("1_fee7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(554.84375, 263)
+shape = SubResource("RectangleShape2D_l4qke")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
+position = Vector2(630.00006, 214.00002)
+scale = Vector2(0.90624976, 0.38281253)
+texture = ExtResource("1_fee7y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(630.25, 213)
+shape = SubResource("RectangleShape2D_s32r2")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_mfvkk")]
+position = Vector2(146, 129)
+scale = Vector2(0.5, 0.5)
