@@ -1,0 +1,72 @@
+# Normalise EOL for all files that Git considers text files
+* text=auto eol=lf
+
+# Explicitly declare text files to ensure safe cross-platform merges
+*.gd text eol=lf
+*.gdshader text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+*.project text eol=lf
+*.csv text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.xml text eol=lf
+*.svg text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+
+# Godot specific binary files and exported translation binaries
+*.scn binary
+*.res binary
+*.material binary
+*.anim binary
+*.mesh binary
+*.lmbake binary
+*.translation binary
+
+# 3D models and raw Blender projects
+*.fbx binary
+*.glb binary
+*.gltf binary
+*.blend binary
+*.obj binary
+
+# Image assets and raw artwork projects
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.tga binary
+*.webp binary
+*.exr binary
+*.hdr binary
+*.dds binary
+*.psb binary
+*.psd binary
+*.kra binary
+*.ase binary
+*.aseprite binary
+*.sbsar binary
+*.spp binary
+*.spsm binary
+
+# Audio assets and raw audio workstation projects
+*.mp3 binary
+*.wav binary
+*.ogg binary
+*.cwb binary
+*.cwp binary
+
+# Fonts and icons
+*.ttf binary
+*.otf binary
+*.ico binary
+
+# Executables and OS specific artefacts
+*.exe binary
+*.pck binary
+*.x86 binary
+*.x86_64 binary
+*.dmg binary
+*.app binary
