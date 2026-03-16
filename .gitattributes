@@ -7,6 +7,9 @@
 *.tscn text eol=lf
 *.tres text eol=lf
 *.project text eol=lf
+*.cs text eol=lf
+*.csproj text eol=lf
+*.sln text eol=lf
 *.csv text eol=lf
 *.json text eol=lf
 *.md text eol=lf

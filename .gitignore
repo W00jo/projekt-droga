@@ -8,6 +8,17 @@ export.cfg
 export_credentials.cfg
 override.cfg
 
+# Godot Mono specific ignores
+.mono/
+data_*/
+mono_crash.*.json
+
+# C# and .NET specific ignores
+.vs/
+bin/
+obj/
+*.user
+
 # Auto-generated translation binaries
 *.translation
 
