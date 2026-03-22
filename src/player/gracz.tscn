@@ -4,20 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://b24id8fkx5ix" path="res://icon.svg" id="1_nhsor"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5he5d"]
-radius = 24.0
-height = 86.0
+radius = 45.0
+height = 112.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=916138121]
 script = ExtResource("1_5he5d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(111.99998, 282.5)
-scale = Vector2(0.3124998, 0.55468744)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1910348722]
+position = Vector2(126.49999, 294)
+scale = Vector2(0.5390625, 0.7343749)
 texture = ExtResource("1_nhsor")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(112, 281)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604226020]
+position = Vector2(126, 294)
 shape = SubResource("CapsuleShape2D_5he5d")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(113, 286)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=499156092]
+position = Vector2(127, 298)
