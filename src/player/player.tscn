@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c722vntaki1rg"]
 
-[ext_resource type="Script" uid="uid://bbjvqugii544i" path="res://gracz.gd" id="1_5he5d"]
-[ext_resource type="Texture2D" uid="uid://b24id8fkx5ix" path="res://icon.svg" id="1_nhsor"]
+[ext_resource type="Script" uid="uid://bbjvqugii544i" path="res://src/player/player.gd" id="1_5he5d"]
+[ext_resource type="Texture2D" uid="uid://g72do0ftsld6" path="res://icon.svg" id="1_nhsor"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5he5d"]
 radius = 45.0
