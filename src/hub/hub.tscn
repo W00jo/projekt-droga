@@ -1,0 +1,123 @@
+[gd_scene format=3 uid="uid://dbo6vpjulatv"]
+
+[ext_resource type="Texture2D" uid="uid://r3s7b6xdlgmb" path="res://src/hub/hub_background.png" id="1_8xbvn"]
+[ext_resource type="Texture2D" uid="uid://bjeeytmn1qwcs" path="res://src/hub/doors.png" id="2_c3p1t"]
+[ext_resource type="Texture2D" uid="uid://bsxjua54f87f" path="res://src/hub/hub_locker.png" id="3_bfsw3"]
+[ext_resource type="Script" uid="uid://fv3kih0imp0a" path="res://src/hub/door.gd" id="4_gb5ag"]
+[ext_resource type="Texture2D" uid="uid://dws5mbakgqcwq" path="res://src/hub/hub_garage_door.png" id="4_lgcv4"]
+[ext_resource type="Script" uid="uid://dq7slx8aqhnrq" path="res://src/hub/garage_door.gd" id="5_0pbk3"]
+[ext_resource type="Texture2D" uid="uid://dcf07tmp13ydk" path="res://src/hub/hub_window.png" id="5_lgcv4"]
+[ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player.tscn" id="5_r4qrh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgcv4"]
+atlas = ExtResource("2_c3p1t")
+region = Rect2(0, 0, 29, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4qrh"]
+atlas = ExtResource("2_c3p1t")
+region = Rect2(29, 0, 29, 177)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lgcv4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgcv4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4qrh")
+}],
+"loop": true,
+"name": &"door_anim",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_r4qrh"]
+a = Vector2(183, 15)
+b = Vector2(134, 90)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb5ag"]
+atlas = ExtResource("4_lgcv4")
+region = Rect2(0, 0, 138, 359)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pbk3"]
+atlas = ExtResource("4_lgcv4")
+region = Rect2(138, 0, 138, 359)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4qrh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb5ag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pbk3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0pbk3"]
+a = Vector2(-106, -47)
+b = Vector2(28, 166)
+
+[node name="Node2D" type="Node2D" unique_id=1162545500]
+
+[node name="Hub" type="StaticBody2D" parent="." unique_id=769936134]
+
+[node name="SpriteHub" type="Sprite2D" parent="Hub" unique_id=166090569]
+position = Vector2(563, 327)
+texture = ExtResource("1_8xbvn")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub" unique_id=1663058610]
+build_mode = 1
+polygon = PackedVector2Array(390, 291, 210, 553, 909, 553, 739, 290)
+
+[node name="SpriteWindow" type="Sprite2D" parent="Hub" unique_id=799114519]
+position = Vector2(613, 211)
+texture = ExtResource("5_lgcv4")
+
+[node name="AreaDoor" type="Area2D" parent="Hub" unique_id=1552201425]
+position = Vector2(119, 380)
+script = ExtResource("4_gb5ag")
+
+[node name="SpriteDoor" type="AnimatedSprite2D" parent="Hub/AreaDoor" unique_id=60324831]
+position = Vector2(154, 3)
+sprite_frames = SubResource("SpriteFrames_lgcv4")
+animation = &"door_anim"
+frame = 1
+speed_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaDoor" unique_id=532745411]
+position = Vector2(20, 32)
+shape = SubResource("SegmentShape2D_r4qrh")
+
+[node name="Locker" type="StaticBody2D" parent="Hub" unique_id=1078989921]
+position = Vector2(365, 288)
+
+[node name="SpriteLocker" type="Sprite2D" parent="Hub/Locker" unique_id=957656199]
+texture = ExtResource("3_bfsw3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub/Locker" unique_id=473750586]
+polygon = PackedVector2Array(-40, 93, 10, 93, 37, 36, 37, -93)
+
+[node name="AreaGarageDoor" type="Area2D" parent="Hub" unique_id=34633248]
+script = ExtResource("5_0pbk3")
+
+[node name="SpriteGarageDoor" type="AnimatedSprite2D" parent="Hub/AreaGarageDoor" unique_id=705870804]
+position = Vector2(821, 332)
+sprite_frames = SubResource("SpriteFrames_r4qrh")
+frame = 1
+speed_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaGarageDoor" unique_id=1475233593]
+position = Vector2(832, 359)
+shape = SubResource("SegmentShape2D_0pbk3")
+
+[node name="Player" parent="." unique_id=18291 instance=ExtResource("5_r4qrh")]
+position = Vector2(469, 114)
+
+[connection signal="body_entered" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_entered"]
+[connection signal="body_exited" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_exited"]
+[connection signal="body_entered" from="Hub/AreaGarageDoor" to="Hub/AreaGarageDoor" method="_on_body_entered"]
+[connection signal="body_exited" from="Hub/AreaGarageDoor" to="Hub/AreaGarageDoor" method="_on_body_exited"]
