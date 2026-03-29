@@ -1,58 +1,199 @@
 [gd_scene format=3 uid="uid://1ge0ny6333nh"]
 
-[node name="MainMenu" type="Control" unique_id=915144141]
+[ext_resource type="Script" uid="uid://bavphrb6w4ox1" path="res://src/menus/main_menu.gd" id="1_1n2f7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.0509804, 0.0745098, 0.0901961, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.388235, 0.568627, 0.560784, 0.8)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.121569, 0.188235, 0.2, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.341176, 0.52549, 0.509804, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.27451, 0.411765, 0.4, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.658824, 0.854902, 0.815686, 0.95)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
+content_margin_left = 18.0
+content_margin_top = 10.0
+content_margin_right = 18.0
+content_margin_bottom = 10.0
+bg_color = Color(0.196078, 0.294118, 0.290196, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.545098, 0.756863, 0.717647, 0.9)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_focus"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.835294, 0.921569, 0.607843, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="MainMenu" type="Control" unique_id=1591350116]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_1n2f7")
 
-[node name="SplashScreen" type="TextureRect" parent="." unique_id=138101831]
+[node name="MainMenuBackgroundArt" type="TextureRect" parent="." unique_id=807933259]
 layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-expand_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="MenuController" type="VBoxContainer" parent="." unique_id=1211745452]
+[node name="FlavourBox" type="PanelContainer" parent="." unique_id=1605421844]
+layout_mode = 1
+offset_left = 54.0
+offset_top = 52.0
+offset_right = 466.7803
+offset_bottom = 258.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="FlavourBoxPadding" type="MarginContainer" parent="FlavourBox" unique_id=1087532579]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
+
+[node name="FlavourText" type="RichTextLabel" parent="FlavourBox/FlavourBoxPadding" unique_id=767161041]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Koleszkowice, 2025[/b]
+
+Droga jest dluga, autobus spozniony, rowy głębokie, a chodniki żadne.
+
+Przynajmniej drugie śniadanie od mamy jest (jeszcze) ciepłe..."
+fit_content = true
+scroll_active = false
+
+[node name="MenuController" type="VBoxContainer" parent="." unique_id=105378835]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -251.0
-offset_top = -99.0
-offset_right = -87.0
-offset_bottom = 99.0
+offset_left = -470.0
+offset_top = -220.0
+offset_right = -62.0
+offset_bottom = 220.0
 grow_horizontal = 0
 grow_vertical = 2
-alignment = 1
+theme_override_constants/separation = 14
 
-[node name="TitleGameLabel" type="Label" parent="MenuController" unique_id=227350110]
+[node name="TitleGameLabel" type="Label" parent="MenuController" unique_id=2007373533]
 layout_mode = 2
-text = "Projekt Droga"
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 62
+text = "PROJEKT DROGA"
+horizontal_alignment = 2
 
-[node name="MenuButtons" type="VBoxContainer" parent="MenuController" unique_id=360763441]
+[node name="MenuButtons" type="VBoxContainer" parent="MenuController" unique_id=1028963939]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="ContinueButton" type="Button" parent="MenuController/MenuButtons" unique_id=627712521]
+[node name="ContinueButton" type="Button" parent="MenuController/MenuButtons" unique_id=549592439]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.898039, 1)
+theme_override_colors/font_disabled_color = Color(0.584314, 0.596078, 0.576471, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+disabled = true
 text = "CONTINUE_BUTTON"
 
-[node name="StartButton" type="Button" parent="MenuController/MenuButtons" unique_id=1113649383]
+[node name="StartButton" type="Button" parent="MenuController/MenuButtons" unique_id=138836265]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.898039, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
 text = "START_BUTTON"
 
-[node name="OptionsButton" type="Button" parent="MenuController/MenuButtons" unique_id=1070107780]
+[node name="OptionsButton" type="Button" parent="MenuController/MenuButtons" unique_id=306740070]
 layout_mode = 2
-text = "OPTIONS_BUTTON"
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.898039, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
+text = "SETTINGS_BUTTON"
 
-[node name="CreditsButton" type="Button" parent="MenuController/MenuButtons" unique_id=411473737]
+[node name="CreditsButton" type="Button" parent="MenuController/MenuButtons" unique_id=1440458277]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.898039, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
 text = "CREDITS_BUTTON"
 
-[node name="DesktopButton" type="Button" parent="MenuController/MenuButtons" unique_id=1786815871]
+[node name="DesktopButton" type="Button" parent="MenuController/MenuButtons" unique_id=177469255]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.901961, 0.921569, 0.898039, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_button_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_button_hover")
+theme_override_styles/focus = SubResource("StyleBoxFlat_button_focus")
 text = "DESKTOP_BUTTON"
