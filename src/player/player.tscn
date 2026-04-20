@@ -21,3 +21,8 @@ shape = SubResource("CapsuleShape2D_5he5d")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=499156092]
 position = Vector2(127, 298)
+limit_left = 0
+limit_top = 0
+limit_bottom = 604
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
