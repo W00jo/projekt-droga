@@ -1,0 +1,26 @@
+name: Static UID Analysis
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  static-uid-analysis:
+    name: Static UID Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          
+      - name: Grant execution permissions
+        run: chmod +x scripts/ci/static_uid_analysis.py
+
+      - name: Execute static UID analysis
+        run: ./scripts/ci/static_uid_analysis.py

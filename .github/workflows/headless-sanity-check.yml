@@ -1,0 +1,62 @@
+name: Headless Sanity Check
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+env:
+  # Base version extracted from project.godot features.
+  # Modify this if Godot begins requiring specific patches (e.g., 4.6.1-stable)
+  GODOT_VERSION: "4.6-stable"
+  DOTNET_VERSION: "8.0.x"
+
+jobs:
+  headless-sanity-check:
+    name: Headless Sanity Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET Environment
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Download and Install Godot .NET Engine
+        run: |
+          echo "[INFO] Fetching Godot Engine v${GODOT_VERSION} Mono Build..."
+          wget -q https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_mono_linux_x86_64.zip -O godot.zip
+          unzip -q godot.zip
+          
+          # Move full folder to preserve GodotSharp dependencies
+          sudo mv Godot_v${GODOT_VERSION}_mono_linux_x86_64 /opt/godot
+          sudo ln -s /opt/godot/Godot_v${GODOT_VERSION}_mono_linux.x86_64 /usr/local/bin/godot
+          rm godot.zip
+
+      - name: Compile C# Assemblies
+        run: |
+          echo "[INFO] Triggering native MSBuild compiler..."
+          if find . -maxdepth 1 -name "*.sln" | grep -q .; then
+            dotnet build -c Release
+          else
+            echo "::warning::[WARNING] Target .sln file missing. Disabling .NET MSBuild initialisation."
+          fi
+
+      - name: Headless Asset Parse & Sanity Check
+        run: |
+          set -eo pipefail
+          echo "[INFO] Commencing Godot Engine editor simulation..."
+          # Pipe stdout and stderr into a single log file
+          godot --headless --editor --quit 2>&1 | tee engine_import.log
+          
+          # Hunt for explicit Godot Error markers in the output
+          if grep -q "ERROR:" engine_import.log; then
+            echo "::error::[ERROR] Engine structural or script defects detected during Headless cache generation."
+            exit 1
+          else
+            echo "[INFO] Engine simulation completed with exit code 0."
+            exit 0
+          fi
