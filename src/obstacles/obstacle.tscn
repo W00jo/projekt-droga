@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bcpcw624eqr14"]
+
+[ext_resource type="Script" uid="uid://d0ji1e7viaglg" path="res://src/obstacles/obstacle.gd" id="1_1dfmg"]
+[ext_resource type="Texture2D" uid="uid://g72do0ftsld6" path="res://icon.svg" id="1_orxak"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dfmg"]
+size = Vector2(128, 127)
+
+[node name="Obstacle" type="Area2D" unique_id=897080305]
+script = ExtResource("1_1dfmg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=193309837]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_1dfmg")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1862053249]
+modulate = Color(1, 0, 0, 1)
+texture = ExtResource("1_orxak")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=1783779297]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

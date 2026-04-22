@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://g72do0ftsld6" path="res://icon.svg" id="1_sxqmm"]
 [ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player.tscn" id="2_xb41a"]
+[ext_resource type="PackedScene" uid="uid://bcpcw624eqr14" path="res://src/obstacles/obstacle.tscn" id="3_xb41a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mfvkk"]
 
@@ -19,3 +20,6 @@ shape = SubResource("RectangleShape2D_mfvkk")
 
 [node name="CharacterBody2D" parent="." unique_id=916138121 instance=ExtResource("2_xb41a")]
 position = Vector2(135, 80)
+
+[node name="Obstacle" parent="." unique_id=897080305 instance=ExtResource("3_xb41a")]
+position = Vector2(890, 431)
