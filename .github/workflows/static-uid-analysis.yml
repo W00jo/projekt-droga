@@ -20,7 +20,7 @@ jobs:
           python-version: '3.12'
           
       - name: Grant execution permissions
-        run: chmod +x scripts/ci/static_uid_analysis.py
+        run: chmod +x .github/scripts/ci/static_uid_analysis.py
 
       - name: Execute static UID analysis
-        run: ./scripts/ci/static_uid_analysis.py
+        run: ./.github/scripts/ci/static_uid_analysis.py
