@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b82lukvrwdyhh" path="res://src/level/level.gd" id="1_af42n"]
 [ext_resource type="Texture2D" uid="uid://bnwfti10q0id1" path="res://src/environment/tiles.png" id="2_mpbj7"]
 [ext_resource type="PackedScene" uid="uid://bsshgl33f2wue" path="res://src/player/player_level.tscn" id="3_em31m"]
+[ext_resource type="PackedScene" uid="uid://lbkg5dhwx4eu" path="res://src/environment/countryside_parallax/countryside_parallax_bg.tscn" id="4_mpbj7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w7y1s"]
 texture = ExtResource("2_mpbj7")
@@ -24,8 +25,12 @@ sources/1 = SubResource("TileSetAtlasSource_w7y1s")
 script = ExtResource("1_af42n")
 
 [node name="BackgroundPlaceholder" type="Polygon2D" parent="." unique_id=2060795983]
+visible = false
 color = Color(0.41442293, 0.5030705, 0.7048671, 1)
 polygon = PackedVector2Array(0, 0, 0, 648, 1152, 648, 1152, 0)
+
+[node name="CountrysideParallaxBg" parent="." unique_id=483123916 instance=ExtResource("4_mpbj7")]
+position = Vector2(0, -133)
 
 [node name="Tracks" type="TileMapLayer" parent="." unique_id=877194834]
 position = Vector2(-208.99998, 285.00003)
