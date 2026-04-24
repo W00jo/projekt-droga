@@ -1,28 +1,18 @@
 [gd_scene format=3 uid="uid://c722vntaki1rg"]
 
-[ext_resource type="Script" uid="uid://bbjvqugii544i" path="res://src/player/player.gd" id="1_5he5d"]
+[ext_resource type="Script" uid="uid://bbjvqugii544i" path="res://src/player/player_wasd.gd" id="1_5he5d"]
 [ext_resource type="Texture2D" uid="uid://g72do0ftsld6" path="res://icon.svg" id="1_nhsor"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5he5d"]
 radius = 45.0
 height = 112.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=916138121]
+[node name="PlayerWASD" type="CharacterBody2D" unique_id=916138121]
 script = ExtResource("1_5he5d")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1910348722]
-position = Vector2(126.49999, 294)
 scale = Vector2(0.5390625, 0.7343749)
 texture = ExtResource("1_nhsor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604226020]
-position = Vector2(126, 294)
 shape = SubResource("CapsuleShape2D_5he5d")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=499156092]
-position = Vector2(127, 298)
-limit_left = 0
-limit_top = 0
-limit_bottom = 604
-position_smoothing_enabled = true
-drag_horizontal_enabled = true

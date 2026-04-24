@@ -21,5 +21,5 @@ func _on_spawn_timer_timeout() -> void:
 
 # W zależności, czy Playera zrobimy jako CharacterBody czy jako Area,
 # będzie tu sygnał "body entered" lub "area entered" (podpięte w zakładce Signals)
-func _on_body_entered(body: Node2D) -> void:
+func _on_area_entered(area: Area2D) -> void:
 	print("Player collided with obstacle")

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dws5mbakgqcwq" path="res://src/hub/hub_garage_door.png" id="4_lgcv4"]
 [ext_resource type="Script" uid="uid://dq7slx8aqhnrq" path="res://src/hub/garage_door.gd" id="5_0pbk3"]
 [ext_resource type="Texture2D" uid="uid://dcf07tmp13ydk" path="res://src/hub/hub_window.png" id="5_lgcv4"]
-[ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player.tscn" id="5_r4qrh"]
+[ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player_wasd.tscn" id="5_r4qrh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgcv4"]
 atlas = ExtResource("2_c3p1t")
@@ -114,8 +114,8 @@ speed_scale = 0.0
 position = Vector2(832, 359)
 shape = SubResource("SegmentShape2D_0pbk3")
 
-[node name="Player" parent="." unique_id=18291 instance=ExtResource("5_r4qrh")]
-position = Vector2(469, 114)
+[node name="PlayerWASD" parent="." unique_id=916138121 instance=ExtResource("5_r4qrh")]
+position = Vector2(621, 414)
 
 [connection signal="body_entered" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_exited"]
