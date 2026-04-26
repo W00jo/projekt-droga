@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dafxnrcnu7d16"]
+
+[sub_resource type="Animation" id="Animation_qbcca"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_lfxnc"]
+resource_name = "transition_fadeout"
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0009999999, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ylc62"]
+_data = {
+&"RESET": SubResource("Animation_qbcca"),
+&"transition_fadeout": SubResource("Animation_lfxnc")
+}
+
+[node name="LevelTransition" type="CanvasLayer" unique_id=138945070]
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1050478703]
+offset_left = -87.0
+offset_top = -78.0
+offset_right = 1299.0
+offset_bottom = 764.0
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=200909533]
+root_node = NodePath("../ColorRect")
+libraries/ = SubResource("AnimationLibrary_ylc62")

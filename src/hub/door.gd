@@ -9,9 +9,9 @@ func _process(_delta: float) -> void:
 	pass
 	
 func _on_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "PlayerWASD":
 		get_node("SpriteDoor").frame = 0
 	
 func _on_body_exited(body: Node2D) -> void:
-	if body.name == "Player":
+	if body.name == "PlayerWASD":
 		get_node("SpriteDoor").frame = 1

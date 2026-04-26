@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bnwfti10q0id1" path="res://src/environment/tiles.png" id="2_mpbj7"]
 [ext_resource type="PackedScene" uid="uid://bsshgl33f2wue" path="res://src/player/player_level.tscn" id="3_em31m"]
 [ext_resource type="PackedScene" uid="uid://lbkg5dhwx4eu" path="res://src/environment/countryside_parallax/countryside_parallax_bg.tscn" id="4_mpbj7"]
+[ext_resource type="PackedScene" uid="uid://dafxnrcnu7d16" path="res://src/level/level_transition.tscn" id="5_em31m"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_w7y1s"]
 texture = ExtResource("2_mpbj7")
@@ -41,3 +42,5 @@ tile_set = SubResource("TileSet_5vox1")
 [node name="PlayerLevel" parent="." unique_id=1556861879 instance=ExtResource("3_em31m")]
 position = Vector2(285.00003, 350)
 scale = Vector2(2.75, 2.75)
+
+[node name="LevelTransition" parent="." unique_id=138945070 instance=ExtResource("5_em31m")]

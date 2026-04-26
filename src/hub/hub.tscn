@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dq7slx8aqhnrq" path="res://src/hub/garage_door.gd" id="5_0pbk3"]
 [ext_resource type="Texture2D" uid="uid://dcf07tmp13ydk" path="res://src/hub/hub_window.png" id="5_lgcv4"]
 [ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player_wasd.tscn" id="5_r4qrh"]
+[ext_resource type="PackedScene" uid="uid://dafxnrcnu7d16" path="res://src/level/level_transition.tscn" id="9_r4qrh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgcv4"]
 atlas = ExtResource("2_c3p1t")
@@ -35,43 +36,26 @@ animations = [{
 a = Vector2(183, 15)
 b = Vector2(134, 90)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gb5ag"]
-atlas = ExtResource("4_lgcv4")
-region = Rect2(0, 0, 138, 359)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0pbk3"]
-atlas = ExtResource("4_lgcv4")
-region = Rect2(138, 0, 138, 359)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_r4qrh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gb5ag")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0pbk3")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0pbk3"]
-a = Vector2(-106, -47)
-b = Vector2(28, 166)
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yo4oc"]
+a = Vector2(-60, -69)
+b = Vector2(51, 72)
 
 [node name="Node2D" type="Node2D" unique_id=1162545500]
 
 [node name="Hub" type="StaticBody2D" parent="." unique_id=769936134]
+position = Vector2(1, 0)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub" unique_id=1663058610]
+build_mode = 1
+polygon = PackedVector2Array(402, 323, 375, 378, 331, 378, 210, 553, 914, 553, 890.6749, 518.01227, 883, 351, 755, 215, 751, 296, 730, 288, 402, 288)
 
 [node name="SpriteHub" type="Sprite2D" parent="Hub" unique_id=166090569]
 position = Vector2(563, 327)
 texture = ExtResource("1_8xbvn")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub" unique_id=1663058610]
-build_mode = 1
-polygon = PackedVector2Array(390, 291, 210, 553, 909, 553, 739, 290)
+[node name="SpriteLocker" type="Sprite2D" parent="Hub" unique_id=957656199]
+position = Vector2(365, 288)
+texture = ExtResource("3_bfsw3")
 
 [node name="SpriteWindow" type="Sprite2D" parent="Hub" unique_id=799114519]
 position = Vector2(613, 211)
@@ -92,32 +76,23 @@ speed_scale = 0.0
 position = Vector2(20, 32)
 shape = SubResource("SegmentShape2D_r4qrh")
 
-[node name="Locker" type="StaticBody2D" parent="Hub" unique_id=1078989921]
-position = Vector2(365, 288)
-
-[node name="SpriteLocker" type="Sprite2D" parent="Hub/Locker" unique_id=957656199]
-texture = ExtResource("3_bfsw3")
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub/Locker" unique_id=473750586]
-polygon = PackedVector2Array(-40, 93, 10, 93, 37, 36, 37, -93)
-
 [node name="AreaGarageDoor" type="Area2D" parent="Hub" unique_id=34633248]
 script = ExtResource("5_0pbk3")
 
-[node name="SpriteGarageDoor" type="AnimatedSprite2D" parent="Hub/AreaGarageDoor" unique_id=705870804]
+[node name="SpriteGarageDoor" type="Sprite2D" parent="Hub/AreaGarageDoor" unique_id=2022423440]
+z_index = 1
 position = Vector2(821, 332)
-sprite_frames = SubResource("SpriteFrames_r4qrh")
-frame = 1
-speed_scale = 0.0
+texture = ExtResource("4_lgcv4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaGarageDoor" unique_id=1475233593]
-position = Vector2(832, 359)
-shape = SubResource("SegmentShape2D_0pbk3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaGarageDoor" unique_id=673221910]
+position = Vector2(828, 358)
+shape = SubResource("SegmentShape2D_yo4oc")
 
-[node name="PlayerWASD" parent="." unique_id=916138121 instance=ExtResource("5_r4qrh")]
-position = Vector2(621, 414)
+[node name="LevelTransition" parent="Hub" unique_id=138945070 instance=ExtResource("9_r4qrh")]
+
+[node name="PlayerWASD" parent="Hub" unique_id=916138121 instance=ExtResource("5_r4qrh")]
+position = Vector2(564, 378)
 
 [connection signal="body_entered" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_exited"]
 [connection signal="body_entered" from="Hub/AreaGarageDoor" to="Hub/AreaGarageDoor" method="_on_body_entered"]
-[connection signal="body_exited" from="Hub/AreaGarageDoor" to="Hub/AreaGarageDoor" method="_on_body_exited"]
