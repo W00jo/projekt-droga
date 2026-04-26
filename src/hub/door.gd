@@ -11,7 +11,13 @@ func _process(_delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "PlayerWASD":
 		get_node("SpriteDoor").frame = 0
+		get_node("SpriteHubWall").visible = true
 	
 func _on_body_exited(body: Node2D) -> void:
 	if body.name == "PlayerWASD":
 		get_node("SpriteDoor").frame = 1
+		get_node("SpriteHubWall").visible = false
+
+func _on_area_game_exit_body_entered(body: Node2D) -> void:
+	if body.name == "PlayerWASD":
+		get_tree().quit()

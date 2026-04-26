@@ -10,31 +10,34 @@
 [ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player_wasd.tscn" id="5_r4qrh"]
 [ext_resource type="PackedScene" uid="uid://dafxnrcnu7d16" path="res://src/level/level_transition.tscn" id="9_r4qrh"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgcv4"]
-atlas = ExtResource("2_c3p1t")
-region = Rect2(0, 0, 29, 177)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4qrh"]
 atlas = ExtResource("2_c3p1t")
-region = Rect2(29, 0, 29, 177)
+region = Rect2(0, 0, 75, 177)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yo4oc"]
+atlas = ExtResource("2_c3p1t")
+region = Rect2(75, 0, 75, 177)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgcv4"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lgcv4")
+"texture": SubResource("AtlasTexture_r4qrh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r4qrh")
+"texture": SubResource("AtlasTexture_yo4oc")
 }],
 "loop": true,
 "name": &"door_anim",
 "speed": 5.0
 }]
 
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_r4qrh"]
+points = PackedVector2Array(181, 54, 170, 83, 65, 54, 74, 6)
+
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_r4qrh"]
-a = Vector2(183, 15)
-b = Vector2(134, 90)
+a = Vector2(-22, 43)
+b = Vector2(1, -9)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_yo4oc"]
 a = Vector2(-60, -69)
@@ -47,11 +50,12 @@ position = Vector2(1, 0)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hub" unique_id=1663058610]
 build_mode = 1
-polygon = PackedVector2Array(402, 323, 375, 378, 331, 378, 210, 553, 914, 553, 890.6749, 518.01227, 883, 351, 755, 215, 751, 296, 730, 288, 402, 288)
+polygon = PackedVector2Array(402, 323, 375, 378, 331, 378, 295, 432, 213, 417, 204, 465, 258, 483, 210, 553, 914, 553, 890.6749, 518.01227, 883, 351, 755, 215, 751, 296, 730, 288, 402, 288)
 
 [node name="SpriteHub" type="Sprite2D" parent="Hub" unique_id=166090569]
 position = Vector2(563, 327)
 texture = ExtResource("1_8xbvn")
+region_rect = Rect2(0, 0, 750, 468)
 
 [node name="SpriteLocker" type="Sprite2D" parent="Hub" unique_id=957656199]
 position = Vector2(365, 288)
@@ -66,7 +70,7 @@ position = Vector2(119, 380)
 script = ExtResource("4_gb5ag")
 
 [node name="SpriteDoor" type="AnimatedSprite2D" parent="Hub/AreaDoor" unique_id=60324831]
-position = Vector2(154, 3)
+position = Vector2(178, 3)
 sprite_frames = SubResource("SpriteFrames_lgcv4")
 animation = &"door_anim"
 frame = 1
@@ -74,6 +78,21 @@ speed_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaDoor" unique_id=532745411]
 position = Vector2(20, 32)
+shape = SubResource("ConvexPolygonShape2D_r4qrh")
+
+[node name="SpriteHubWall" type="Sprite2D" parent="Hub/AreaDoor" unique_id=402247073]
+visible = false
+z_index = 1
+position = Vector2(105, -14)
+texture = ExtResource("1_8xbvn")
+region_enabled = true
+region_rect = Rect2(0, 157, 72, 231)
+
+[node name="AreaGameExit" type="Area2D" parent="Hub" unique_id=47650648]
+position = Vector2(193, 399)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hub/AreaGameExit" unique_id=37338658]
+position = Vector2(51, 32)
 shape = SubResource("SegmentShape2D_r4qrh")
 
 [node name="AreaGarageDoor" type="Area2D" parent="Hub" unique_id=34633248]
@@ -95,4 +114,5 @@ position = Vector2(564, 378)
 
 [connection signal="body_entered" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_exited"]
+[connection signal="body_entered" from="Hub/AreaGameExit" to="Hub/AreaDoor" method="_on_area_game_exit_body_entered"]
 [connection signal="body_entered" from="Hub/AreaGarageDoor" to="Hub/AreaGarageDoor" method="_on_body_entered"]
