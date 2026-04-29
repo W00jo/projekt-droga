@@ -1,25 +1,31 @@
-# W zależności od mechaniki ruchu gracza, to może być Area2D lub StaticBody2D
-extends Area2D
+# Concrete obstacle type backed by a Sprite2D and a CollisionShape2D
+# Receives its texture at runtime from the PoolManager based on the current biome
+extends PoolableObstacle
 
-var spawn_time:float = randf_range(1, 8)
-@onready var spawn_timer:Timer = $SpawnTimer
-@onready var area_shape:CollisionShape2D = $CollisionShape2D
-
+@export var sprite: Sprite2D
+@export var collision_shape: CollisionShape2D
 
 func _ready() -> void:
-	# Przeszkoda na początku jest niewidoczna i area nie działa
-	area_shape.disabled = true
-	visible = false
+	# Only disable if we haven't been explicitly activated by setup() yet
+	# This prevents _ready from hiding the obstacle when it first enters the scene tree
+	if not is_active:
+		if collision_shape:
+			collision_shape.disabled = true
+		visible = false
+
+func setup(texture: Texture2D) -> void:
+	super.setup(texture)
 	
-	# Na razie timer będzie się od razu włączał, później to odpowiednio zmienimy
-	spawn_timer.start(spawn_time)
+	if sprite and texture:
+		sprite.texture = texture
+		
+	if collision_shape:
+		collision_shape.set_deferred("disabled", false)
 
-func _on_spawn_timer_timeout() -> void:
-	# Obiekt się spawnuje = zaczyna być widoczny i ma włączoną areę
-	area_shape.disabled = false
-	visible = true
+func disable_collision() -> void:
+	if collision_shape:
+		collision_shape.set_deferred("disabled", true)
 
-# W zależności, czy Playera zrobimy jako CharacterBody czy jako Area,
-# będzie tu sygnał "body entered" lub "area entered" (podpięte w zakładce Signals)
-func _on_area_entered(area: Area2D) -> void:
+# Collision callback triggered when the player enters the obstacle's area
+func _on_area_entered(_area: Area2D) -> void:
 	print("Player collided with obstacle")
