@@ -18,7 +18,6 @@ position = Vector2(0, -133)
 
 [node name="PlayerLevel" parent="." unique_id=1556861879 instance=ExtResource("3_em31m")]
 position = Vector2(285, 350)
-scale = Vector2(2.75, 2.75)
-z_index = 2
+scale = Vector2(2.25, 2.25)
 
 [node name="LevelTransition" parent="." unique_id=138945070 instance=ExtResource("5_em31m")]
