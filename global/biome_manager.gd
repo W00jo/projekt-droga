@@ -9,6 +9,11 @@ const TILE_DIRT_LEFT: Vector2i = Vector2i(0, 0)
 const TILE_DIRT_MID: Vector2i = Vector2i(1, 0)
 const TILE_DIRT_RIGHT: Vector2i = Vector2i(2, 0)
 
+# Configuration for procedural dirt shoulder generation
+const DIRT_SPAWN_PROBABILITY: float = 0.05
+const DIRT_MIN_TILES: int = 3
+const DIRT_MAX_TILES: int = 8
+
 # State variables to track continuous features across multiple chunk generations
 # This ensures that a dirt section smoothly spans across chunk boundaries
 var _is_in_dirt_section: bool = false
@@ -36,11 +41,11 @@ func get_chunk_layout(width_in_tiles: int, number_of_lanes: int) -> Array:
 				_is_in_dirt_section = false
 				_dirt_tiles_left = 0
 		else:
-			# 5% chance per tile to begin a new dirt section while on the sidewalk
-			if randf() < 0.05:
+			# Chance per tile to begin a new dirt section while on the sidewalk
+			if randf() < DIRT_SPAWN_PROBABILITY:
 				_is_in_dirt_section = true
-				# Total length of the dirt shoulder (between 3 and 8 tiles)
-				_dirt_tiles_left = randi_range(3, 8)
+				# Total length of the dirt shoulder
+				_dirt_tiles_left = randi_range(DIRT_MIN_TILES, DIRT_MAX_TILES)
 				# Start the section with the left-edge transition tile
 				top_lane_tile = TILE_DIRT_LEFT
 			else:

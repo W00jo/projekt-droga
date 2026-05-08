@@ -16,7 +16,7 @@ const POOL_SIZE: int = 5
 var active_chunks: Array[ProceduralChunk] = []
 
 # List of active obstacles currently rendering in the level
-var active_obstacles: Array[PoolableObstacle] = []
+var active_obstacles: Array[PoolableEntity] = []
 
 @onready var chunks_container: Node2D = Node2D.new()
 @onready var obstacles_container: Node2D = Node2D.new()
@@ -50,8 +50,6 @@ func _process(delta: float) -> void:
 func get_track_position_y(track_index: int) -> float:
 	var clamped_index: int = clampi(track_index, 1, TRACK_COUNT)
 	return (clamped_index - 1) * TRACK_Y_SPACING + TRACK_1_POS_Y
-
-
 
 # Pre-allocates a fixed number of chunks at the start of the game
 func _initialise_chunk_pool() -> void:
@@ -89,7 +87,7 @@ func _scroll_environment(delta: float) -> void:
 	# Scroll obstacles at global speed and recycle any that leave the viewport
 	const OFFSCREEN_THRESHOLD: float = -200.0
 	for i in range(active_obstacles.size() - 1, -1, -1):
-		var obstacle: PoolableObstacle = active_obstacles[i]
+		var obstacle: PoolableEntity = active_obstacles[i]
 		obstacle.position.x -= global_speed * delta
 		
 		if obstacle.position.x < OFFSCREEN_THRESHOLD:
@@ -113,7 +111,7 @@ func can_spawn_obstacle_at(local_x: float, track: int) -> bool:
 # Deploys initial test obstacles to verify Z-indexing and depth sorting mechanics
 func _spawn_test_obstacles() -> void:
 	# Spawning the first obstacle on track 2 (upper road lane)
-	var obstacle1: PoolableObstacle = PoolManager.get_instance("obstacle", "countryside")
+	var obstacle1: PoolableEntity = PoolManager.get_instance("obstacle", "countryside")
 	obstacles_container.add_child(obstacle1)
 	obstacle1.position = Vector2(800.0, get_track_position_y(2))
 	obstacle1.z_index = 2
@@ -121,7 +119,7 @@ func _spawn_test_obstacles() -> void:
 	
 	# Spawning the second obstacle on track 3 (lower road lane), closer to the camera (higher Z-index)
 	# We intentionally bypass the can_spawn_obstacle_at check here to demonstrate visual Z-index overlap
-	var obstacle2: PoolableObstacle = PoolManager.get_instance("obstacle", "countryside")
+	var obstacle2: PoolableEntity = PoolManager.get_instance("obstacle", "countryside")
 	obstacles_container.add_child(obstacle2)
 	obstacle2.position = Vector2(850.0, get_track_position_y(3))
 	obstacle2.z_index = 3
@@ -134,7 +132,7 @@ func _spawn_test_obstacles() -> void:
 	if not is_instance_valid(self) or not is_inside_tree():
 		return
 		
-	var obstacle3: PoolableObstacle = PoolManager.get_instance("obstacle", "countryside")
+	var obstacle3: PoolableEntity = PoolManager.get_instance("obstacle", "countryside")
 	obstacles_container.add_child(obstacle3)
 	
 	# Spawn outside the screen to the right so it scrolls into view naturally
