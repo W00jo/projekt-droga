@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vb5j7myw8sxf"
-path="res://.godot/imported/water_puddle_2.png-7a4f8e187203bc8ff8c525c1a3cff831.ctex"
+path="res://.godot/imported/water_puddle_2.png-99f0d7bb58920ef9a8070d376cfa0c33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/environment/water_puddle_2.png"
-dest_files=["res://.godot/imported/water_puddle_2.png-7a4f8e187203bc8ff8c525c1a3cff831.ctex"]
+source_file="res://src/obstacles/water_puddle_2.png"
+dest_files=["res://.godot/imported/water_puddle_2.png-99f0d7bb58920ef9a8070d376cfa0c33.ctex"]
 
 [params]
 

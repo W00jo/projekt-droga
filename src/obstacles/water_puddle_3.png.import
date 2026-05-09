@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg0d587yp1jso"
-path="res://.godot/imported/water_puddle_1.png-440e49be135f7e079ce8f7d5008d2ba1.ctex"
+uid="uid://dug1rl0dj1hg2"
+path="res://.godot/imported/water_puddle_3.png-77efb57bfe80df7e86d348419d2e667a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/environment/water_puddle_1.png"
-dest_files=["res://.godot/imported/water_puddle_1.png-440e49be135f7e079ce8f7d5008d2ba1.ctex"]
+source_file="res://src/obstacles/water_puddle_3.png"
+dest_files=["res://.godot/imported/water_puddle_3.png-77efb57bfe80df7e86d348419d2e667a.ctex"]
 
 [params]
 
