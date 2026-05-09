@@ -1,0 +1,85 @@
+name: GitHub Pages Web Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+# Required by the official GitHub Pages deployment actions
+# pages:write grants permission to publish content to the Pages site
+# id-token:write enables the OIDC token exchange for secure artifact uploads
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevents concurrent deployments from overwriting each other mid-upload
+# If a new commit arrives while a deployment is in progress, the older
+# run is cancelled in favour of the latest revision
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+env:
+  # Release tag used for downloading the engine binary and export templates
+  # from the official Godot GitHub repository
+  # Modify this if Godot begins requiring specific patches (e.g., 4.6.1-stable)
+  GODOT_VERSION: "4.6-stable"
+
+jobs:
+  github-pages-web-deploy:
+    name: GitHub Pages Web Deploy
+    # Registers the job as a GitHub Pages deployment, enabling the
+    # environment URL to appear in the repository sidebar
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download and Install Godot Engine
+        run: |
+          echo "[INFO] Fetching Godot Engine v${GODOT_VERSION}..."
+          wget -q https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_linux.x86_64.zip -O godot.zip
+          unzip -q godot.zip
+
+          sudo mv Godot_v${GODOT_VERSION}_linux.x86_64 /usr/local/bin/godot
+          rm godot.zip
+
+      - name: Download Export Templates
+        run: |
+          echo "[INFO] Fetching Godot Export Templates..."
+          wget -q https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}/Godot_v${GODOT_VERSION}_export_templates.tpz -O templates.tpz
+          unzip -q templates.tpz
+
+          # Godot release tags use a hyphen (4.6-stable) but the engine
+          # resolves export templates from a dot-separated directory (4.6.stable)
+          TEMPLATE_DIR="${GODOT_VERSION/-/.}"
+          mkdir -p ~/.local/share/godot/export_templates/${TEMPLATE_DIR}
+          mv templates/* ~/.local/share/godot/export_templates/${TEMPLATE_DIR}/
+          rm -rf templates templates.tpz
+
+      - name: Generate Asset Cache
+        run: |
+          echo "[INFO] Initialising editor to build the .godot asset cache..."
+          # The editor must run once to generate the internal import cache
+          # before a headless export can resolve resource UIDs and dependencies
+          godot --headless --editor --quit
+
+      - name: Export Web Build
+        run: |
+          echo "[INFO] Commencing headless Web export..."
+          mkdir -p build/web
+          # "Web" refers to the exact preset name defined in export_presets.cfg
+          godot --headless --export-release "Web" build/web/index.html
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
