@@ -21,27 +21,28 @@ autoscroll = Vector2(-20, 0)
 position = Vector2(576, 324)
 texture = ExtResource("1_uonr0")
 
-[node name="Horizon" type="Parallax2D" parent="." unique_id=314170243]
-scroll_offset = Vector2(0, 60)
-repeat_size = Vector2(1152, 0)
-autoscroll = Vector2(-70, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="Horizon" unique_id=1282669581]
-position = Vector2(576, 340)
-scale = Vector2(4, 4)
-texture = ExtResource("2_jyrcu")
-
 [node name="Grass" type="Parallax2D" parent="." unique_id=2076686956]
 scroll_offset = Vector2(0, 70)
 repeat_size = Vector2(1152, 0)
 autoscroll = Vector2(-220, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Grass" unique_id=1171100310]
-position = Vector2(576, 324)
+position = Vector2(579, 203)
 scale = Vector2(4, 4)
 texture = ExtResource("3_m5pt1")
 
+[node name="Horizon" type="Parallax2D" parent="." unique_id=314170243]
+scroll_offset = Vector2(0, -78)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-70, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="Horizon" unique_id=1282669581]
+position = Vector2(578, 255)
+scale = Vector2(4, 4)
+texture = ExtResource("2_jyrcu")
+
 [node name="Fence" type="Parallax2D" parent="." unique_id=2030713046]
+visible = false
 repeat_size = Vector2(1152, 0)
 autoscroll = Vector2(-250, 0)
 
