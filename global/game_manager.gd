@@ -95,7 +95,7 @@ func change_state(new_state: GameState) -> void:
 		current_state = new_state
 		state_changed.emit(current_state)
 
-func deduct_currency(amount: int) -> void:
+func deduct_currency(amount: float) -> void:
 	current_currency = max(0.0, current_currency - amount)
 	currency_updated.emit(current_currency)
 

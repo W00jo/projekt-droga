@@ -24,11 +24,7 @@ func _process(_delta: float) -> void:
 	
 	# Update the autoscroll property for each layer
 	# We use negative values because the background must move left to simulate forward motion
-	if layer_far_background:
-		layer_far_background.autoscroll.x = -base_speed * MULTIPLIER_FAR_BACKGROUND
-	if layer_mid_background:
-		layer_mid_background.autoscroll.x = -base_speed * MULTIPLIER_MID_BACKGROUND
-	if layer_near_background:
-		layer_near_background.autoscroll.x = -base_speed * MULTIPLIER_NEAR_BACKGROUND
-	if layer_foreground:
-		layer_foreground.autoscroll.x = -base_speed * MULTIPLIER_FOREGROUND
+	layer_far_background.autoscroll.x = -base_speed * MULTIPLIER_FAR_BACKGROUND
+	layer_mid_background.autoscroll.x = -base_speed * MULTIPLIER_MID_BACKGROUND
+	layer_near_background.autoscroll.x = -base_speed * MULTIPLIER_NEAR_BACKGROUND
+	layer_foreground.autoscroll.x = -base_speed * MULTIPLIER_FOREGROUND
