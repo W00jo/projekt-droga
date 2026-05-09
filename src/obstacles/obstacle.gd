@@ -8,24 +8,9 @@ var assigned_track:int
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 
-func _ready() -> void:
-	_configure_obstacle_from_profile(self, "countryside")
-
-# Selects a random profile from the biome and applies it to the obstacle instance
-func _configure_obstacle_from_profile(instance: PoolableEntity, biome: String) -> void:
-	var profiles: Array = PoolManager.biome_profiles[biome]
-	var obstacle: Obstacle = instance as Obstacle
-	
-	# Pick a random profile only from ones allowed on the obstacle's track
-	# e.g. if the obstacle is on track 2, pick only from profiles that allow track 2
-	var profiles_allowed_by_track: Array
-	for p in profiles:
-		if assigned_track in p.allowed_tracks:
-			profiles_allowed_by_track.append(p)
-	if not profiles_allowed_by_track.is_empty():
-		var profile: ObstacleProfile = profiles_allowed_by_track.pick_random()
-		obstacle.setup_from_profile(profile)
-
+#func _ready() -> void:
+	#_configure_obstacle_from_profile(self, "countryside")
+#
 
 # Applies all visual and physical properties from the given profile
 func setup_from_profile(profile: ObstacleProfile) -> void:

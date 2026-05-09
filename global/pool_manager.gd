@@ -1,16 +1,5 @@
 extends Node
 
-# Obstacle profiles grouped by biome; each profile defines texture variants,
-# sprite scale/offset, and collision shape/offset for a single obstacle type
-var biome_profiles: Dictionary = {
-	"countryside": [
-		preload("res://src/obstacles/profiles/countryside_car.tres"),
-		preload("res://src/obstacles/profiles/bush.tres")
-	],
-	"city": [
-		preload("res://src/obstacles/profiles/city_car.tres")
-	]
-}
 
 # Configuration for multi-pools
 # To add a new poolable type, define its scene and initial size here
@@ -74,9 +63,11 @@ func release_instance(type_id: String, instance: PoolableEntity) -> void:
 		push_error("PoolManager: Cannot release instance to unknown type_id '%s'" % type_id)
 		instance.queue_free()
 		return
-
-	#if instance.get_parent():
-		#instance.get_parent().remove_child(instance)
+	
+	print("Release")
+	
+	if instance.get_parent():
+		instance.get_parent().remove_child(instance)
 
 	instance.position = Vector2.ZERO
 	instance.deactivate()

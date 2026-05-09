@@ -24,7 +24,7 @@ config/icon="uid://5d3e2u0ho6fs"
 GameManager="*res://global/game_manager.gd"
 BiomeManager="*res://global/biome_manager.gd"
 PoolManager="*res://global/pool_manager.gd"
-SFXClickManager="*uid://dujoxteodxosu"
+SFXClickManager="*res://global/ui_audio_manager.gd"
 
 [debug]
 

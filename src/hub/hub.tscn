@@ -111,6 +111,7 @@ shape = SubResource("SegmentShape2D_yo4oc")
 
 [node name="PlayerWASD" parent="Hub" unique_id=916138121 instance=ExtResource("5_r4qrh")]
 position = Vector2(564, 378)
+scale = Vector2(2.2, 2.2)
 
 [connection signal="body_entered" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="Hub/AreaDoor" to="Hub/AreaDoor" method="_on_body_exited"]

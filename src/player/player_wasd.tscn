@@ -1,20 +1,121 @@
 [gd_scene format=3 uid="uid://c722vntaki1rg"]
 
 [ext_resource type="Script" uid="uid://bbjvqugii544i" path="res://src/player/player_wasd.gd" id="1_5he5d"]
-[ext_resource type="Texture2D" uid="uid://7i5gg2m7d7wm" path="res://src/player/player_sprite_neutral.png" id="2_50rp4"]
+[ext_resource type="Texture2D" uid="uid://wvu8rhkwqfdk" path="res://src/player/player_wasd_spritesheet.png" id="2_50rp4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_5he5d"]
-radius = 21.0
-height = 42.0
+radius = 9.0
+height = 20.0
+
+[sub_resource type="Animation" id="Animation_nmv5g"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_a4kd2"]
+resource_name = "walk_down"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_ijvo4"]
+resource_name = "walk_left"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [10, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_1gki8"]
+resource_name = "walk_right"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [7, 6, 7, 8]
+}
+
+[sub_resource type="Animation" id="Animation_mo05p"]
+resource_name = "walk_up"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 4, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xtpcm"]
+_data = {
+&"RESET": SubResource("Animation_nmv5g"),
+&"walk_down": SubResource("Animation_a4kd2"),
+&"walk_left": SubResource("Animation_ijvo4"),
+&"walk_right": SubResource("Animation_1gki8"),
+&"walk_up": SubResource("Animation_mo05p")
+}
 
 [node name="PlayerWASD" type="CharacterBody2D" unique_id=916138121]
 script = ExtResource("1_5he5d")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1910348722]
-position = Vector2(0.49999988, -4.9999933)
 scale = Vector2(1.7, 1.7)
 texture = ExtResource("2_50rp4")
+hframes = 3
+vframes = 4
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=604226020]
-position = Vector2(2, 33)
+position = Vector2(0, 11)
 shape = SubResource("CapsuleShape2D_5he5d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1435814797]
+libraries/ = SubResource("AnimationLibrary_xtpcm")
