@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2qwerk4dkms3"
-path="res://.godot/imported/player_sprite_2.png-5545558f6c86404cf3f176533670b9ac.ctex"
+uid="uid://tuaefhm4j2nd"
+path="res://.godot/imported/sewer_manhole.png-21aecc8f62b1f6c386bdb707a09b413a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/player/player_sprite_2.png"
-dest_files=["res://.godot/imported/player_sprite_2.png-5545558f6c86404cf3f176533670b9ac.ctex"]
+source_file="res://src/obstacles/sewer_manhole.png"
+dest_files=["res://.godot/imported/sewer_manhole.png-21aecc8f62b1f6c386bdb707a09b413a.ctex"]
 
 [params]
 

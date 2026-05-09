@@ -1,5 +1,6 @@
 # Handles the player's lane-switching movement, delegating spatial queries
 # to the LevelManager and smoothing transitions with Tween animations
+class_name Player
 extends Area2D
 
 # The lane index the player is currently occupying (1-based, starting from top)

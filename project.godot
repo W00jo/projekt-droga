@@ -25,6 +25,10 @@ GameManager="*res://global/game_manager.gd"
 BiomeManager="*res://global/biome_manager.gd"
 PoolManager="*res://global/pool_manager.gd"
 
+[debug]
+
+gdscript/warnings/integer_division=0
+
 [display]
 
 window/stretch/mode="canvas_items"

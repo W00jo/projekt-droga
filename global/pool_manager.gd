@@ -2,9 +2,10 @@ extends Node
 
 # Obstacle profiles grouped by biome; each profile defines texture variants,
 # sprite scale/offset, and collision shape/offset for a single obstacle type
-var _biome_profiles: Dictionary = {
+var biome_profiles: Dictionary = {
 	"countryside": [
-		preload("res://src/obstacles/profiles/countryside_car.tres")
+		preload("res://src/obstacles/profiles/countryside_car.tres"),
+		preload("res://src/obstacles/profiles/bush.tres")
 	],
 	"city": [
 		preload("res://src/obstacles/profiles/city_car.tres")
@@ -16,7 +17,7 @@ var _biome_profiles: Dictionary = {
 var _pool_configs: Dictionary = {
 	"obstacle": {
 		"scene": preload("res://src/obstacles/obstacle.tscn"),
-		"initial_size": 10
+		"initial_size": 12
 	}
 	# Example for future enemies:
 	# "dog": { "scene": preload("res://src/enemies/dog.tscn"), "initial_size": 1 }
@@ -41,6 +42,7 @@ func _initialise_pools() -> void:
 			_active_pools[type_id].append(instance)
 
 # Retrieves an instance from the specified pool and configures it for the given biome
+@warning_ignore("unused_parameter")
 func get_instance(type_id: String, biome: String = "countryside") -> PoolableEntity:
 	if not _active_pools.has(type_id):
 		push_error("PoolManager: No pool configured for type_id '%s'" % type_id)
@@ -59,7 +61,8 @@ func get_instance(type_id: String, biome: String = "countryside") -> PoolableEnt
 	# Only apply biome profiles for the generic "obstacle" type
 	# Other poolable types (e.g., dog) rely on their own internal setup
 	if type_id == "obstacle":
-		_configure_obstacle_from_profile(instance, biome)
+		#_configure_obstacle_from_profile(instance, biome)
+		pass
 	else:
 		instance.activate()
 
@@ -72,18 +75,10 @@ func release_instance(type_id: String, instance: PoolableEntity) -> void:
 		instance.queue_free()
 		return
 
-	if instance.get_parent():
-		instance.get_parent().remove_child(instance)
+	#if instance.get_parent():
+		#instance.get_parent().remove_child(instance)
 
 	instance.position = Vector2.ZERO
 	instance.deactivate()
 
 	_active_pools[type_id].append(instance)
-
-# Selects a random profile from the biome and applies it to the obstacle instance
-func _configure_obstacle_from_profile(instance: PoolableEntity, biome: String) -> void:
-	var profiles: Array = _biome_profiles[biome]
-	var obstacle: Obstacle = instance as Obstacle
-
-	var profile: ObstacleProfile = profiles.pick_random()
-	obstacle.setup_from_profile(profile)
