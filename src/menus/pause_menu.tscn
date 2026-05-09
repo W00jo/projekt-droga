@@ -1,22 +1,59 @@
 [gd_scene format=3 uid="uid://l780qgr87qnu"]
 
-[node name="PauseMenu" type="Control" unique_id=2048476555]
-layout_mode = 3
-anchors_preset = 0
+[ext_resource type="Script" uid="uid://bcpju40w8bs01" path="res://src/menus/pause_menu.gd" id="1_pido5"]
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=478885005]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="PauseMenu" type="CanvasLayer" unique_id=1673586501]
+process_mode = 3
+script = ExtResource("1_pido5")
 
-[node name="PauseButtonsContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1942154449]
+[node name="DimScreen" type="ColorRect" parent="." unique_id=1703211565]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.47058824)
+
+[node name="PhoneBackground" type="NinePatchRect" parent="." unique_id=767151017]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PhoneBackground" unique_id=154365399]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -80.0
+offset_right = 83.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ContinueButton" type="Button" parent="PhoneBackground/VBoxContainer" unique_id=80122446]
+layout_mode = 2
+text = "CONTINUE_BUTTON"
+
+[node name="Label" type="Label" parent="PhoneBackground/VBoxContainer" unique_id=1297452339]
+layout_mode = 2
+text = "SFX_SOUND"
+horizontal_alignment = 1
+
+[node name="MasterSoundSlide" type="HSlider" parent="PhoneBackground/VBoxContainer" unique_id=540639890]
 layout_mode = 2
 
-[node name="ContinueButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=790054914]
+[node name="ExitGameButton" type="Button" parent="PhoneBackground/VBoxContainer" unique_id=1252041067]
 layout_mode = 2
-
-[node name="SoundButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=1033235192]
-layout_mode = 2
-
-[node name="ExitGameButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=898777336]
-layout_mode = 2
+text = "EXIT_GAME_BUTTON"
