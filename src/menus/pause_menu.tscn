@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://l780qgr87qnu"]
+
+[node name="PauseMenu" type="Control" unique_id=2048476555]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=478885005]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseButtonsContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1942154449]
+layout_mode = 2
+
+[node name="ContinueButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=790054914]
+layout_mode = 2
+
+[node name="SoundButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=1033235192]
+layout_mode = 2
+
+[node name="ExitGameButton" type="Button" parent="CenterContainer/PauseButtonsContainer" unique_id=898777336]
+layout_mode = 2
