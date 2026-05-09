@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://cdu5s07waf1qs"]
 
-[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_script"]
+[ext_resource type="Script" path="res://src/obstacles/obstacle_profile.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://db2q6lp8gjmqx" path="res://src/obstacles/cars/car_red.png" id="2_red"]
 [ext_resource type="Texture2D" uid="uid://b4i2qt6fukrlc" path="res://src/obstacles/cars/car_blue.png" id="3_blue"]
 [ext_resource type="Texture2D" uid="uid://6phb3hcagb3s" path="res://src/obstacles/cars/car_green.png" id="4_green"]
