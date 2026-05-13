@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://dpl32k7yri4a4"]
+
+[ext_resource type="Script" uid="uid://u1ulksf8erwg" path="res://src/hud/clock_display.gd" id="1_ony6l"]
+[ext_resource type="Texture2D" uid="uid://c8varr3bcvycy" path="res://src/hud/alarm_clock.png" id="2_8ej7y"]
+[ext_resource type="FontFile" uid="uid://cmulgt36rw6dt" path="res://assets/fonts/tiny5/tiny5_regular.ttf" id="3_cs14m"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7hkyr"]
+font = ExtResource("3_cs14m")
+font_size = 32
+font_color = Color(0.5058824, 0.65882355, 0.40392157, 1)
+
+[node name="HUD" type="Control" unique_id=1962771496]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ClockDisplay" type="Control" parent="." unique_id=609080886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 15.0
+offset_top = -2.0
+offset_right = 15.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ony6l")
+
+[node name="ClockBackground" type="TextureRect" parent="ClockDisplay" unique_id=780550129]
+texture_filter = 1
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 100.0
+texture = ExtResource("2_8ej7y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TimeLabel" type="Label" parent="ClockDisplay/ClockBackground" unique_id=1601769198]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 34.0
+offset_right = -8.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_7hkyr")
+horizontal_alignment = 1
+vertical_alignment = 1

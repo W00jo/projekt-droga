@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://lbkg5dhwx4eu" path="res://src/environment/countryside_parallax/countryside_parallax_bg.tscn" id="4_mpbj7"]
 [ext_resource type="PackedScene" uid="uid://dafxnrcnu7d16" path="res://src/level/level_transition.tscn" id="5_em31m"]
 [ext_resource type="PackedScene" uid="uid://iwhr4ou0u28m" path="res://src/obstacles/obstacle_spawner.tscn" id="5_w7y1s"]
+[ext_resource type="PackedScene" uid="uid://dpl32k7yri4a4" path="res://src/hud/hud.tscn" id="6_w7y1s"]
 
 [node name="Level" type="Node2D" unique_id=1874155512]
 script = ExtResource("1_af42n")
@@ -24,3 +25,5 @@ scale = Vector2(2.25, 2.25)
 [node name="LevelTransition" parent="." unique_id=138945070 instance=ExtResource("5_em31m")]
 
 [node name="ObstacleSpawner" parent="." unique_id=1927055351 instance=ExtResource("5_w7y1s")]
+
+[node name="HUD" parent="." unique_id=1962771496 instance=ExtResource("6_w7y1s")]
