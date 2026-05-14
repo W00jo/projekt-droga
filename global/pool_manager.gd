@@ -6,7 +6,7 @@ extends Node
 var _pool_configs: Dictionary = {
 	"obstacle": {
 		"scene": preload("res://src/obstacles/obstacle.tscn"),
-		"initial_size": 12
+		"initial_size": 10
 	}
 	# Example for future enemies:
 	# "dog": { "scene": preload("res://src/enemies/dog.tscn"), "initial_size": 1 }
@@ -25,7 +25,7 @@ func _initialise_pools() -> void:
 		var config: Dictionary = _pool_configs[type_id]
 		var scene: PackedScene = config["scene"]
 		var size: int = config.get("initial_size", 5)
-
+		
 		for i in range(size):
 			var instance: PoolableEntity = scene.instantiate() as PoolableEntity
 			_active_pools[type_id].append(instance)
@@ -36,7 +36,7 @@ func get_instance(type_id: String, biome: String = "countryside") -> PoolableEnt
 	if not _active_pools.has(type_id):
 		push_error("PoolManager: No pool configured for type_id '%s'" % type_id)
 		return null
-
+	
 	var pool: Array = _active_pools[type_id]
 	var instance: PoolableEntity
 
@@ -46,15 +46,7 @@ func get_instance(type_id: String, biome: String = "countryside") -> PoolableEnt
 		instance = scene.instantiate() as PoolableEntity
 	else:
 		instance = pool.pop_back() as PoolableEntity
-
-	# Only apply biome profiles for the generic "obstacle" type
-	# Other poolable types (e.g., dog) rely on their own internal setup
-	if type_id == "obstacle":
-		#_configure_obstacle_from_profile(instance, biome)
-		pass
-	else:
-		instance.activate()
-
+	
 	return instance
 
 # Resets the instance and returns it to its respective pool for reuse
@@ -64,12 +56,10 @@ func release_instance(type_id: String, instance: PoolableEntity) -> void:
 		instance.queue_free()
 		return
 	
-	print("Release")
-	
 	if instance.get_parent():
 		instance.get_parent().remove_child(instance)
-
+	
 	instance.position = Vector2.ZERO
 	instance.deactivate()
-
+	
 	_active_pools[type_id].append(instance)

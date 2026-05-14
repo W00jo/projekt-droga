@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://b8wl8mhwiuwcw"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_ui751"]
+[ext_resource type="Texture2D" uid="uid://cg0d587yp1jso" path="res://src/obstacles/water_puddle_1.png" id="2_nc2ks"]
+[ext_resource type="Texture2D" uid="uid://vb5j7myw8sxf" path="res://src/obstacles/water_puddle_2.png" id="3_ctkwi"]
+[ext_resource type="Texture2D" uid="uid://dug1rl0dj1hg2" path="res://src/obstacles/water_puddle_3.png" id="4_m1o3j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ui751"]
+size = Vector2(125, 45)
+
+[resource]
+script = ExtResource("1_ui751")
+texture_variants = Array[Texture2D]([ExtResource("2_nc2ks"), ExtResource("3_ctkwi"), ExtResource("4_m1o3j")])
+sprite_scale = Vector2(3, 3)
+sprite_offset = Vector2(0, -35)
+collision_shape = SubResource("RectangleShape2D_ui751")
+collision_offset = Vector2(1, -20)
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

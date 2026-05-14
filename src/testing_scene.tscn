@@ -1,6 +1,13 @@
 [gd_scene format=4 uid="uid://c5tju32jxsgwa"]
 
 [ext_resource type="Texture2D" uid="uid://bnwfti10q0id1" path="res://src/environment/tiles.png" id="1_oqg74"]
+[ext_resource type="PackedScene" uid="uid://bsshgl33f2wue" path="res://src/player/player_level.tscn" id="2_gvym2"]
+[ext_resource type="Texture2D" uid="uid://dft3ei7skiyr4" path="res://src/obstacles/road_block.png" id="3_4hfh7"]
+[ext_resource type="Texture2D" uid="uid://cg0d587yp1jso" path="res://src/obstacles/water_puddle_1.png" id="4_n5o8i"]
+[ext_resource type="Texture2D" uid="uid://tuaefhm4j2nd" path="res://src/obstacles/sewer_manhole.png" id="5_myl28"]
+[ext_resource type="Texture2D" uid="uid://ii31ycf0irf8" path="res://src/obstacles/traffic_cone.png" id="6_efjpw"]
+[ext_resource type="Texture2D" uid="uid://ijee28x0mdcb" path="res://src/obstacles/trash_bin.png" id="7_gr31l"]
+[ext_resource type="Texture2D" uid="uid://cmhn4bt8xmkf" path="res://src/obstacles/trash_bags.png" id="8_2cwew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sxqmm"]
 texture = ExtResource("1_oqg74")
@@ -18,6 +25,19 @@ tile_layout = 2
 tile_size = Vector2i(46, 33)
 sources/1 = SubResource("TileSetAtlasSource_sxqmm")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7i7u"]
+size = Vector2(125, 45)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8fhc"]
+size = Vector2(80, 40)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gkm5w"]
+radius = 28.0
+height = 60.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e52dy"]
+size = Vector2(115, 35)
+
 [node name="Scena" type="Node2D" unique_id=126588184]
 
 [node name="Tracks" type="TileMapLayer" parent="." unique_id=1365276167]
@@ -25,3 +45,78 @@ position = Vector2(-208.99998, 285.00003)
 scale = Vector2(2.75, 2.75)
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAAAAQABAAAAAAACAAAAAQACAAAAAAAAAAEAAQAAAAEAAAAAAAIAAQAAAAIAAAABAAEAAQAAAAEAAAACAAEAAQAAAAEAAAABAAIAAQAAAAIAAAACAAIAAQAAAAIAAAADAAAAAQABAAEAAAAEAAAAAQABAAIAAAAFAAAAAQABAAIAAAADAAEAAQAAAAEAAAAEAAEAAQAAAAEAAAAFAAEAAQAAAAEAAAADAAIAAQAAAAIAAAAEAAIAAQAAAAIAAAAFAAIAAQAAAAIAAAAGAAAAAQABAAIAAAAHAAAAAQABAAIAAAAIAAAAAQABAAIAAAD//wAAAQACAAAAAAD//wEAAQAAAAEAAAD//wIAAQAAAAIAAAAGAAEAAQAAAAEAAAAHAAEAAQAAAAEAAAAIAAEAAQAAAAEAAAAGAAIAAQAAAAIAAAAHAAIAAQAAAAIAAAAIAAIAAQAAAAIAAAAJAAAAAQABAAIAAAAKAAAAAQABAAIAAAALAAAAAQABAAIAAAAMAAAAAQABAAIAAAAJAAEAAQAAAAEAAAAKAAEAAQAAAAEAAAALAAEAAQAAAAEAAAAMAAEAAQAAAAEAAAAJAAIAAQAAAAIAAAAKAAIAAQAAAAIAAAALAAIAAQAAAAIAAAAMAAIAAQAAAAIAAAD//wMAAQABAAIAAAAAAAMAAQABAAIAAAABAAMAAQABAAIAAAACAAMAAQABAAIAAAADAAMAAQABAAIAAAAEAAMAAQABAAIAAAAFAAMAAQABAAIAAAAGAAMAAQABAAIAAAAHAAMAAQABAAIAAAAIAAMAAQABAAIAAAAJAAMAAQABAAIAAAAKAAMAAQABAAIAAAALAAMAAQABAAIAAAAMAAMAAQABAAIAAAA=")
 tile_set = SubResource("TileSet_xb41a")
+
+[node name="PlayerLevel" parent="." unique_id=1556861879 instance=ExtResource("2_gvym2")]
+position = Vector2(-100, 0)
+scale = Vector2(2.25, 2.25)
+
+[node name="RoadBlock" type="Node2D" parent="." unique_id=1694004750]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="RoadBlock" unique_id=805526018]
+position = Vector2(0, -60)
+scale = Vector2(2, 2)
+texture = ExtResource("3_4hfh7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoadBlock" unique_id=861105558]
+position = Vector2(0, -35)
+shape = SubResource("RectangleShape2D_e7i7u")
+
+[node name="Puddle" type="Node2D" parent="." unique_id=1387953898]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="Puddle" unique_id=1891194458]
+position = Vector2(0, -35)
+scale = Vector2(3, 3)
+texture = ExtResource("4_n5o8i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Puddle" unique_id=1937579163]
+position = Vector2(1, -20)
+shape = SubResource("RectangleShape2D_e7i7u")
+
+[node name="SewerManhole" type="Node2D" parent="." unique_id=1911665461]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="SewerManhole" unique_id=1322862643]
+position = Vector2(0, -25)
+scale = Vector2(3, 3)
+texture = ExtResource("5_myl28")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SewerManhole" unique_id=1640516015]
+position = Vector2(28, -25)
+shape = SubResource("RectangleShape2D_v8fhc")
+
+[node name="TrafficCone" type="Node2D" parent="." unique_id=1762338389]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="TrafficCone" unique_id=1101484828]
+position = Vector2(0, -40)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_efjpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrafficCone" unique_id=965553768]
+position = Vector2(0, -35)
+shape = SubResource("CapsuleShape2D_gkm5w")
+
+[node name="TrashBin" type="Node2D" parent="." unique_id=91576953]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="TrashBin" unique_id=377150190]
+position = Vector2(0, -64)
+scale = Vector2(2, 2)
+texture = ExtResource("7_gr31l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashBin" unique_id=837754203]
+position = Vector2(0, -30)
+shape = SubResource("CapsuleShape2D_gkm5w")
+
+[node name="TrashBags" type="Node2D" parent="." unique_id=1698706440]
+
+[node name="Sprite2D" type="Sprite2D" parent="TrashBags" unique_id=718575099]
+position = Vector2(0, -30)
+scale = Vector2(2, 2)
+texture = ExtResource("8_2cwew")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrashBags" unique_id=1126808726]
+position = Vector2(0, -20)
+shape = SubResource("RectangleShape2D_e52dy")

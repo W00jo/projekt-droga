@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6phb3hcagb3s" path="res://src/obstacles/cars/car_green.png" id="4_green"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3bs6a"]
-size = Vector2(253, 50)
+size = Vector2(240, 50)
 
 [resource]
 script = ExtResource("1_script")
@@ -14,5 +14,5 @@ texture_variants = Array[Texture2D]([ExtResource("2_red"), ExtResource("3_blue")
 sprite_scale = Vector2(0.15, 0.15)
 sprite_offset = Vector2(0, -50)
 collision_shape = SubResource("RectangleShape2D_3bs6a")
-collision_offset = Vector2(0, -20)
+collision_offset = Vector2(-10, -20)
 allowed_tracks = Array[int]([2, 3])

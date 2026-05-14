@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://bpgty44xclkop"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_2rij8"]
+[ext_resource type="Texture2D" uid="uid://ijee28x0mdcb" path="res://src/obstacles/trash_bin.png" id="2_5571l"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_oxrtd"]
+radius = 28.0
+height = 60.0
+
+[resource]
+script = ExtResource("1_2rij8")
+texture_variants = Array[Texture2D]([ExtResource("2_5571l")])
+sprite_scale = Vector2(2, 2)
+sprite_offset = Vector2(0, -64)
+collision_shape = SubResource("CapsuleShape2D_oxrtd")
+collision_offset = Vector2(0, -30)
+allowed_tracks = Array[int]([1, 4])
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

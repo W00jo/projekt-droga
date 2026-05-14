@@ -1,9 +1,11 @@
 extends Node
 
 enum GameState {
+	INACTIVE,     # The run hasn't started
 	ACCELERATING, # The run begins; the player is building up to the target speed
 	RUNNING,      # The player is at the target speed; obstacles and enemies spawn normally
-	DECELERATING, # The player has reached the target distance and is slowing down to the bus stop
+	COASTING,     # The player has reached the target distance
+	DECELERATING, # The player is slowing down to the bus stop
 	FAILED        # The timer has run out before reaching the target distance
 }
 
@@ -17,7 +19,7 @@ signal distance_updated(current_distance: float, target_distance: float)
 # Emitted with a normalised value (0.0 to 1.0), suitable for driving a progress bar
 signal progress_updated(progress_ratio: float)
 
-var current_state: GameState = GameState.ACCELERATING
+var current_state: GameState = GameState.INACTIVE
 var current_scroll_speed: float = 0.0
 var target_scroll_speed: float = 400.0
 var acceleration_rate: float = 150.0
@@ -33,6 +35,8 @@ const PIXELS_PER_METRE: float = 50.0
 var distance_travelled: float = 0.0
 # The required distance (in logical distance units/metres) to reach the bus stop and complete the run
 var target_distance: float = 300.0
+
+var level: LevelManager
 
 func _process(delta: float) -> void:
 	_handle_movement_state(delta)
@@ -67,7 +71,12 @@ func _handle_movement_state(delta: float) -> void:
 
 			# Win condition: the player has reached or exceeded the required distance
 			if distance_travelled >= target_distance:
-				change_state(GameState.DECELERATING)
+				change_state(GameState.COASTING)
+
+		GameState.COASTING:
+			while not level.active_obstacles.is_empty():
+				await get_tree().create_timer(0.1).timeout
+			change_state(GameState.DECELERATING)
 
 		GameState.DECELERATING:
 			current_scroll_speed = move_toward(current_scroll_speed, 0.0, acceleration_rate * delta)

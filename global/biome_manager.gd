@@ -19,6 +19,8 @@ const DIRT_MAX_TILES: int = 8
 var _is_in_dirt_section: bool = false
 var _dirt_tiles_left: int = 0
 
+var current_biome: String = "countryside"
+
 # Generates a 2D array (columns of lanes) representing the tile layout for a single chunk
 func get_chunk_layout(width_in_tiles: int, number_of_lanes: int) -> Array:
 	var layout: Array = []

@@ -29,6 +29,7 @@ var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.
 @export var environment_origin: Vector2 = Vector2(-209, 285)
 
 func _ready() -> void:
+	GameManager.change_state(GameManager.GameState.ACCELERATING)
 	chunks_container.name = "Chunks"
 	chunks_container.position = environment_origin
 	chunks_container.scale = Vector2(CHUNK_SCALE, CHUNK_SCALE)
@@ -38,6 +39,9 @@ func _ready() -> void:
 	# to avoid compounding the Obstacle scene's native scale
 	obstacles_container.name = "Obstacles"
 	add_child(obstacles_container)
+	
+	obstacle_spawner.level = self
+	GameManager.level = self
 	
 	_initialise_chunk_pool()
 	
@@ -93,17 +97,3 @@ func _scroll_environment(delta: float) -> void:
 		if obstacle.position.x < OFFSCREEN_THRESHOLD:
 			PoolManager.release_instance("obstacle", obstacle)
 			active_obstacles.remove_at(i)
-
-# Validates that a new obstacle can be placed at the given position and track
-# without overlapping an existing obstacle on the same or adjacent lanes
-func can_spawn_obstacle_at(local_x: float, track: int) -> bool:
-	const MIN_X_SEPARATION: float = 150.0
-	
-	for obstacle in active_obstacles:
-		if abs(obstacle.position.x - local_x) < MIN_X_SEPARATION:
-			# Reject if the existing obstacle is on the same or a neighbouring track
-			var existing_track: int = obstacle.z_index
-			if abs(existing_track - track) <= 1:
-				return false
-				
-	return true

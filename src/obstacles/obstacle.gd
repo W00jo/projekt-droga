@@ -8,9 +8,6 @@ var assigned_track:int
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 
-#func _ready() -> void:
-	#_configure_obstacle_from_profile(self, "countryside")
-#
 
 # Applies all visual and physical properties from the given profile
 func setup_from_profile(profile: ObstacleProfile) -> void:
@@ -30,4 +27,5 @@ func disable_collision() -> void:
 # Collision callback triggered when the player enters the obstacle's area
 func _on_area_entered(_area: Area2D) -> void:
 	if _area is Player:
+		GameManager.deduct_time(10)
 		print("Player collided with obstacle")

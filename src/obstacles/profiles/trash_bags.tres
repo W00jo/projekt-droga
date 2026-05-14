@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://c57c4xjdik80w"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_5tr51"]
+[ext_resource type="Texture2D" uid="uid://cmhn4bt8xmkf" path="res://src/obstacles/trash_bags.png" id="2_qyft0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iw2ch"]
+size = Vector2(115, 35)
+
+[resource]
+script = ExtResource("1_5tr51")
+texture_variants = Array[Texture2D]([ExtResource("2_qyft0")])
+sprite_scale = Vector2(2, 2)
+sprite_offset = Vector2(0, -30)
+collision_shape = SubResource("RectangleShape2D_iw2ch")
+collision_offset = Vector2(0, -20)
+allowed_tracks = Array[int]([1, 4])
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

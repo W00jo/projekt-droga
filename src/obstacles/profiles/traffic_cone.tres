@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://bg2scsmn4npjv"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_tofql"]
+[ext_resource type="Texture2D" uid="uid://ii31ycf0irf8" path="res://src/obstacles/traffic_cone.png" id="2_r18cq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sf53l"]
+radius = 22.0
+height = 65.0
+
+[resource]
+script = ExtResource("1_tofql")
+texture_variants = Array[Texture2D]([ExtResource("2_r18cq")])
+sprite_scale = Vector2(2.5, 2.5)
+sprite_offset = Vector2(0, -40)
+collision_shape = SubResource("CapsuleShape2D_sf53l")
+collision_offset = Vector2(0, -35)
+allowed_tracks = Array[int]([2, 3])
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

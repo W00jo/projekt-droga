@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://dw2uyhk0mtfbh"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_rjsjo"]
+[ext_resource type="Texture2D" uid="uid://dft3ei7skiyr4" path="res://src/obstacles/road_block.png" id="2_k48h1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rjsjo"]
+size = Vector2(75, 60)
+
+[resource]
+script = ExtResource("1_rjsjo")
+texture_variants = Array[Texture2D]([ExtResource("2_k48h1")])
+sprite_scale = Vector2(2, 2)
+sprite_offset = Vector2(0, -60)
+collision_shape = SubResource("RectangleShape2D_rjsjo")
+collision_offset = Vector2(0, -35)
+allowed_tracks = Array[int]([2, 3])
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

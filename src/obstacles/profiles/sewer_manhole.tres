@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ObstacleProfile" format=3 uid="uid://ibv2i1eskrvd"]
+
+[ext_resource type="Script" uid="uid://b0lixae7cvy7e" path="res://src/obstacles/obstacle_profile.gd" id="1_ty4a2"]
+[ext_resource type="Texture2D" uid="uid://tuaefhm4j2nd" path="res://src/obstacles/sewer_manhole.png" id="2_ua6bw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dd4fy"]
+size = Vector2(80, 40)
+
+[resource]
+script = ExtResource("1_ty4a2")
+texture_variants = Array[Texture2D]([ExtResource("2_ua6bw")])
+sprite_scale = Vector2(3, 3)
+sprite_offset = Vector2(0, -25)
+collision_shape = SubResource("RectangleShape2D_dd4fy")
+collision_offset = Vector2(28, -25)
+allowed_tracks = Array[int]([1, 4])
+metadata/_custom_type_script = "uid://b0lixae7cvy7e"

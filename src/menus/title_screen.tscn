@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxjp7487wrc25"]
 
 [ext_resource type="Texture2D" uid="uid://j5drm16wq4sp" path="res://assets/placeholder.png" id="1_ok4yg"]
-[ext_resource type="Script" uid="uid://b5vveykjjwg8w" path="res://src/menus/title_screen.gd" id="1_r6esh"]
+[ext_resource type="Script" path="res://src/menus/title_screen.gd" id="1_r6esh"]
 
 [sub_resource type="Animation" id="Animation_r6esh"]
 length = 0.001
