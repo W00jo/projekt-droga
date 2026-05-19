@@ -21,7 +21,7 @@ signal progress_updated(progress_ratio: float)
 
 var current_state: GameState = GameState.INACTIVE
 var current_scroll_speed: float = 0.0
-var target_scroll_speed: float = 400.0
+var target_scroll_speed: float = 600.0
 var acceleration_rate: float = 150.0
 
 var current_time: float = 300.0

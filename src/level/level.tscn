@@ -16,7 +16,6 @@ color = Color(0.41442293, 0.5030705, 0.7048671, 1)
 polygon = PackedVector2Array(0, 0, 0, 648, 1152, 648, 1152, 0)
 
 [node name="CountrysideParallaxBg" parent="." unique_id=483123916 instance=ExtResource("4_mpbj7")]
-position = Vector2(0, -133)
 
 [node name="PlayerLevel" parent="." unique_id=1556861879 instance=ExtResource("3_em31m")]
 position = Vector2(285, 350)
@@ -27,6 +26,7 @@ scale = Vector2(2.25, 2.25)
 [node name="ObstacleSpawner" parent="." unique_id=1927055351 instance=ExtResource("5_w7y1s")]
 
 [node name="HUD" parent="." unique_id=1962771496 instance=ExtResource("6_w7y1s")]
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=616161384]
 
 [node name="HUD" type="Control" parent="CanvasLayer" unique_id=535979702]

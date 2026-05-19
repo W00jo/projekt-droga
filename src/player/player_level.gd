@@ -15,7 +15,7 @@ var _movement_tween: Tween
 func _ready() -> void:
 	# Snap to the starting track position without animation on first load
 	position.y = level_manager.get_track_position_y(current_track)
-	z_index = current_track
+	z_index = current_track + 1
 
 func _process(_delta: float) -> void:
 	# Block input when the run has concluded
@@ -44,4 +44,4 @@ func _move_to_track(target_track: int) -> void:
 		_movement_tween = create_tween()
 		_movement_tween.tween_property(self, "position:y", target_y, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
-		z_index = current_track
+		z_index = current_track + 1

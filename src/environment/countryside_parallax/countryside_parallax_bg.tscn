@@ -1,52 +1,189 @@
 [gd_scene format=3 uid="uid://lbkg5dhwx4eu"]
 
 [ext_resource type="Texture2D" uid="uid://3uotfjc68vn1" path="res://src/environment/countryside_parallax/layer_1_parallax.png" id="1_uonr0"]
-[ext_resource type="Texture2D" uid="uid://t2m81qidcgjk" path="res://src/environment/countryside_parallax/layer_2_parallax.png" id="2_jyrcu"]
-[ext_resource type="Texture2D" uid="uid://s2n7872aqsf2" path="res://src/environment/countryside_parallax/layer_3_parallax.png" id="3_m5pt1"]
-[ext_resource type="Texture2D" uid="uid://rrmna8d87vry" path="res://src/environment/countryside_parallax/layer_4_parallax.png" id="4_yr81c"]
+[ext_resource type="Texture2D" uid="uid://bmikl6sy32y4q" path="res://src/environment/countryside_parallax/layer_2_forest.png" id="4_ib2fj"]
 [ext_resource type="Script" uid="uid://c5xsjjclxebep" path="res://src/environment/dynamic_parallax.gd" id="5_dynpx"]
+[ext_resource type="Texture2D" uid="uid://b7pcxkh4ddush" path="res://src/environment/leaf_tree.png" id="6_dn6jc"]
+[ext_resource type="Texture2D" uid="uid://cssjsr5nnm7qt" path="res://src/environment/countryside_parallax/layer_3_forest.png" id="6_tkuoi"]
+[ext_resource type="Texture2D" uid="uid://wkrrfpty1gcn" path="res://src/environment/pine_tree.png" id="7_dn6jc"]
+[ext_resource type="Texture2D" uid="uid://u7c6kgm4wm2p" path="res://src/environment/countryside_parallax/layer_4_field.png" id="7_f3hmt"]
+[ext_resource type="Texture2D" uid="uid://42lphhlg6c1q" path="res://src/environment/brick_house.png" id="8_tkuoi"]
+[ext_resource type="Texture2D" uid="uid://bqc7xtrx7dovx" path="res://src/environment/tractor.png" id="9_dn6jc"]
+[ext_resource type="Texture2D" uid="uid://dw6ftfrxjgb0g" path="res://src/environment/countryside_parallax/layer_5_fence.png" id="9_gglmi"]
+[ext_resource type="Texture2D" uid="uid://d4glk1g3rar76" path="res://src/environment/birch_tree.png" id="9_hdms4"]
+[ext_resource type="Texture2D" uid="uid://cdlw5mwq76fbu" path="res://src/environment/flower_red.png" id="10_f3hmt"]
+[ext_resource type="Texture2D" uid="uid://clq14eesepd5" path="res://src/environment/flower_blue.png" id="11_w2ylu"]
+[ext_resource type="Texture2D" uid="uid://dovt2g4ahl6fy" path="res://src/environment/flower_purple.png" id="13_qk5f4"]
+[ext_resource type="Texture2D" uid="uid://b6m4nuhiivu70" path="res://src/environment/bush_1.png" id="15_fmhvi"]
+[ext_resource type="Texture2D" uid="uid://dbhm84ow6pbc2" path="res://src/environment/boulders.png" id="16_gglmi"]
+[ext_resource type="Texture2D" uid="uid://dk7yy50jed3qc" path="res://src/environment/grassy_boulders.png" id="17_dn6jc"]
+[ext_resource type="Texture2D" uid="uid://cmmlu78k2tixj" path="res://src/environment/lamp_post.png" id="17_fmhvi"]
+[ext_resource type="Texture2D" uid="uid://bu3qoyyf31rw8" path="res://src/environment/countryside_parallax/layer_6_grass.png" id="19_dn6jc"]
 
-[node name="CountrysideParallaxBg" type="Node2D" unique_id=483123916 node_paths=PackedStringArray("layer_far_background", "layer_mid_background", "layer_near_background", "layer_foreground")]
+[node name="CountrysideParallaxBg" type="Node2D" unique_id=483123916 node_paths=PackedStringArray("layer_sky", "layer_forest_far", "layer_forest_near", "layer_field", "layer_items", "layer_fence", "layer_grass")]
 script = ExtResource("5_dynpx")
-layer_far_background = NodePath("Sky")
-layer_mid_background = NodePath("Horizon")
-layer_near_background = NodePath("Grass")
-layer_foreground = NodePath("Fence")
+layer_sky = NodePath("Sky")
+layer_forest_far = NodePath("Forest")
+layer_forest_near = NodePath("Forest2")
+layer_field = NodePath("Field")
+layer_items = NodePath("Items")
+layer_fence = NodePath("Fence")
+layer_grass = NodePath("Grass")
 
 [node name="Sky" type="Parallax2D" parent="." unique_id=1626971135]
+scroll_offset = Vector2(6, -101)
 repeat_size = Vector2(1152, 0)
 autoscroll = Vector2(-20, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Sky" unique_id=1895733029]
-position = Vector2(576, 424)
+[node name="Sky" type="Sprite2D" parent="Sky" unique_id=1895733029]
+position = Vector2(570, 425)
 scale = Vector2(4, 4)
 texture = ExtResource("1_uonr0")
 
-[node name="Grass" type="Parallax2D" parent="." unique_id=2076686956]
-scroll_offset = Vector2(0, 70)
+[node name="Forest" type="Parallax2D" parent="." unique_id=2076686956]
+scroll_offset = Vector2(0, -14)
 repeat_size = Vector2(1152, 0)
 autoscroll = Vector2(-220, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Grass" unique_id=1171100310]
-position = Vector2(579, 203)
+[node name="Forest" type="Sprite2D" parent="Forest" unique_id=1007890645]
+position = Vector2(576, 273)
 scale = Vector2(4, 4)
-texture = ExtResource("3_m5pt1")
+texture = ExtResource("4_ib2fj")
 
-[node name="Horizon" type="Parallax2D" parent="." unique_id=314170243]
-scroll_offset = Vector2(0, -78)
+[node name="Forest2" type="Parallax2D" parent="." unique_id=314170243]
+scroll_offset = Vector2(0, -162)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-150, 0)
+
+[node name="Forest2" type="Sprite2D" parent="Forest2" unique_id=1541381873]
+position = Vector2(576, 419)
+scale = Vector2(4, 4)
+texture = ExtResource("6_tkuoi")
+
+[node name="Field" type="Parallax2D" parent="." unique_id=1167128485]
+scroll_offset = Vector2(0, -142)
 repeat_size = Vector2(1152, 0)
 autoscroll = Vector2(-70, 0)
 
-[node name="Sprite2D2" type="Sprite2D" parent="Horizon" unique_id=1282669581]
-position = Vector2(578, 255)
+[node name="Field" type="Sprite2D" parent="Field" unique_id=605884883]
+position = Vector2(576, 401)
 scale = Vector2(4, 4)
-texture = ExtResource("2_jyrcu")
+texture = ExtResource("7_f3hmt")
+
+[node name="LeafTree" type="Sprite2D" parent="Field" unique_id=67823364]
+position = Vector2(403, 342)
+texture = ExtResource("6_dn6jc")
+
+[node name="LeafTree2" type="Sprite2D" parent="Field" unique_id=2137991140]
+position = Vector2(446, 348)
+texture = ExtResource("6_dn6jc")
+
+[node name="PineTree" type="Sprite2D" parent="Field" unique_id=214093877]
+position = Vector2(1115, 347)
+texture = ExtResource("7_dn6jc")
+
+[node name="Items" type="Parallax2D" parent="." unique_id=921589016]
+scroll_offset = Vector2(-1146, -101)
+repeat_size = Vector2(4608, 0)
+autoscroll = Vector2(-70, 0)
+
+[node name="BrickHouse" type="Sprite2D" parent="Items" unique_id=1626012362]
+position = Vector2(4279, 261)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_tkuoi")
+
+[node name="BrickHouse2" type="Sprite2D" parent="Items" unique_id=2022878104]
+position = Vector2(2009, 261)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("8_tkuoi")
+
+[node name="Tractor" type="Sprite2D" parent="Items" unique_id=147589616]
+position = Vector2(2525, 304)
+scale = Vector2(2.75, 2.75)
+texture = ExtResource("9_dn6jc")
+
+[node name="BirchTree" type="Sprite2D" parent="Items" unique_id=1013283473]
+position = Vector2(1383, 266)
+scale = Vector2(2.2, 2.2)
+texture = ExtResource("9_hdms4")
 
 [node name="Fence" type="Parallax2D" parent="." unique_id=2030713046]
-visible = false
-repeat_size = Vector2(1152, 0)
+repeat_size = Vector2(9216, 0)
 autoscroll = Vector2(-250, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="Fence" unique_id=185191697]
-position = Vector2(576, 324)
-texture = ExtResource("4_yr81c")
+[node name="Fences" type="Sprite2D" parent="Fence" unique_id=120390213]
+position = Vector2(4807, 207)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("9_gglmi")
+
+[node name="Flowers" type="Node2D" parent="Fence" unique_id=1355363500]
+position = Vector2(0, -50)
+
+[node name="Flower" type="Sprite2D" parent="Fence/Flowers" unique_id=1961388268]
+position = Vector2(763, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("11_w2ylu")
+
+[node name="Flower2" type="Sprite2D" parent="Fence/Flowers" unique_id=910290654]
+position = Vector2(791, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("10_f3hmt")
+
+[node name="Flower3" type="Sprite2D" parent="Fence/Flowers" unique_id=1087023998]
+position = Vector2(819, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("10_f3hmt")
+
+[node name="Flower4" type="Sprite2D" parent="Fence/Flowers" unique_id=632314074]
+position = Vector2(736, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("13_qk5f4")
+
+[node name="Flower5" type="Sprite2D" parent="Fence/Flowers" unique_id=1175799836]
+position = Vector2(1943, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("10_f3hmt")
+
+[node name="Flower6" type="Sprite2D" parent="Fence/Flowers" unique_id=1742171556]
+position = Vector2(1915, 306)
+scale = Vector2(2, 2)
+texture = ExtResource("13_qk5f4")
+
+[node name="BushesAndRocks" type="Node2D" parent="Fence" unique_id=1924903378]
+
+[node name="Bush" type="Sprite2D" parent="Fence/BushesAndRocks" unique_id=1552986116]
+position = Vector2(491, 254)
+scale = Vector2(2, 2)
+texture = ExtResource("15_fmhvi")
+
+[node name="Rocks" type="Sprite2D" parent="Fence/BushesAndRocks" unique_id=324536460]
+position = Vector2(1532, 264)
+texture = ExtResource("16_gglmi")
+
+[node name="Rocks2" type="Sprite2D" parent="Fence/BushesAndRocks" unique_id=1483943519]
+position = Vector2(1506, 264)
+texture = ExtResource("16_gglmi")
+
+[node name="Rocks3" type="Sprite2D" parent="Fence/BushesAndRocks" unique_id=2140687887]
+position = Vector2(1592, 264)
+texture = ExtResource("17_dn6jc")
+
+[node name="Grass" type="Parallax2D" parent="." unique_id=1914855222]
+scroll_offset = Vector2(-6, -156)
+repeat_size = Vector2(1152, 0)
+autoscroll = Vector2(-70, 0)
+
+[node name="LampPost" type="Sprite2D" parent="Grass" unique_id=1020945958]
+position = Vector2(30.000008, 297)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("17_fmhvi")
+
+[node name="Grass" type="Sprite2D" parent="Grass" unique_id=146361142]
+position = Vector2(294, 443)
+scale = Vector2(2, 2)
+texture = ExtResource("19_dn6jc")
+
+[node name="Grass2" type="Sprite2D" parent="Grass" unique_id=1775424819]
+position = Vector2(870, 443)
+scale = Vector2(2, 2)
+texture = ExtResource("19_dn6jc")

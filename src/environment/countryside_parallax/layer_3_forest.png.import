@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cebhgsnumfybv"
-path="res://.godot/imported/leafy_tree.png-1d3c08114f1a9f51e12dc6d195cb3aca.ctex"
+uid="uid://cssjsr5nnm7qt"
+path="res://.godot/imported/layer_3_forest.png-9122e2424a36307e2cbfc943b6ffa62a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/environment/leafy_tree.png"
-dest_files=["res://.godot/imported/leafy_tree.png-1d3c08114f1a9f51e12dc6d195cb3aca.ctex"]
+source_file="res://src/environment/countryside_parallax/layer_3_forest.png"
+dest_files=["res://.godot/imported/layer_3_forest.png-9122e2424a36307e2cbfc943b6ffa62a.ctex"]
 
 [params]
 

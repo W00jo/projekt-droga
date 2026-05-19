@@ -2,11 +2,11 @@ class_name ObstacleSpawner
 extends Node2D
 
 # Values for a linear function that goes from START to END,
-# which are also randomized from MIN value to MAX value
-const START_MIN_TIME: float = 1
-const END_MIN_TIME: float = 0.25
-const START_MAX_TIME: float = 1.75
-const END_MAX_TIME: float = 0.45
+# which are also randomised from MIN value to MAX value
+const START_MIN_TIME: float = 0.75
+const END_MIN_TIME: float = 0.2
+const START_MAX_TIME: float = 1.25
+const END_MAX_TIME: float = 0.35
 
 # TODO: add jitter (slight x pos randomising)
 
