@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxjp7487wrc25"]
 
 [ext_resource type="Texture2D" uid="uid://j5drm16wq4sp" path="res://assets/placeholder.png" id="1_ok4yg"]
-[ext_resource type="Script" path="res://src/menus/title_screen.gd" id="1_r6esh"]
+[ext_resource type="Script" uid="uid://b5vveykjjwg8w" path="res://src/menus/title_screen.gd" id="1_r6esh"]
 
 [sub_resource type="Animation" id="Animation_r6esh"]
 length = 0.001
@@ -49,6 +49,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r6esh")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=599826247]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.10485508, 0.08920307, 0.17299685, 1)
 
 [node name="SplashArt" type="TextureRect" parent="." unique_id=989166127]
 layout_mode = 1

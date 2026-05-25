@@ -1,6 +1,7 @@
+class_name TitleScreen
 extends Control
 
-const HUB_SCENE_PATH := "res://src/hub/hub.tscn"
+signal title_screen_killed
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -15,9 +16,8 @@ func _transition_to_hub() -> void:
 	
 	SFXClickManager.play_click()
 	
+	# This signal is received by the main scene, which then enables hub player movement
+	emit_signal("title_screen_killed", true)
+	
 	await get_tree().create_timer(0.15).timeout
-	
-	var change_result := get_tree().change_scene_to_file(HUB_SCENE_PATH)
-	
-	if change_result != OK:
-		push_error("Sprawdź UID ;)")
+	queue_free()

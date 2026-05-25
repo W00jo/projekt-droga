@@ -21,14 +21,13 @@ var active_obstacles: Array[PoolableEntity] = []
 @onready var chunks_container: Node2D = Node2D.new()
 @onready var obstacles_container: Node2D = Node2D.new()
 @onready var obstacle_spawner: ObstacleSpawner = $ObstacleSpawner
-@onready var transition: AnimationPlayer = $"LevelTransition/AnimationPlayer"
 
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
 
 # Configuration for the spatial origin of the endless environment
 @export var environment_origin: Vector2 = Vector2(-209, 285)
 
-func _ready() -> void:
+func start_run() -> void:
 	GameManager.change_state(GameManager.GameState.ACCELERATING)
 	chunks_container.name = "Chunks"
 	chunks_container.position = environment_origin
@@ -44,11 +43,10 @@ func _ready() -> void:
 	GameManager.level = self
 	
 	_initialise_chunk_pool()
-	
-	transition.play_backwards("transition_fadeout")
 
 func _process(delta: float) -> void:
-	_scroll_environment(delta)
+	if GameManager.current_state != GameManager.GameState.INACTIVE:
+		_scroll_environment(delta)
 
 # Provides a centralised way for other entities to determine the exact Y coordinate of a lane
 func get_track_position_y(track_index: int) -> float:

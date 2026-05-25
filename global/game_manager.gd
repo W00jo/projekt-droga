@@ -36,6 +36,8 @@ var distance_travelled: float = 0.0
 # The required distance (in logical distance units/metres) to reach the bus stop and complete the run
 var target_distance: float = 300.0
 
+var main_scene: MainScene
+
 var level: LevelManager
 
 func _process(delta: float) -> void:

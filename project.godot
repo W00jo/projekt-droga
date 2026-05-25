@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Projekt Droga"
-run/main_scene="uid://cxjp7487wrc25"
+run/main_scene="uid://cjwu008npld7t"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://bejxf528s4axx"
 config/icon="uid://5d3e2u0ho6fs"

@@ -1,4 +1,7 @@
+class_name PlayerWASD
 extends CharacterBody2D
+
+var is_active: bool = false
 
 var last_direction: String = "down"
 @onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -31,5 +34,6 @@ func get_input():
 			"left": sprite.frame = 10
 
 func _physics_process(_delta):
-	get_input()
-	move_and_slide()
+	if is_active:
+		get_input()
+		move_and_slide()
