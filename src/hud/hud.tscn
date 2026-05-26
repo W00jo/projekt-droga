@@ -1,13 +1,30 @@
 [gd_scene format=3 uid="uid://dpl32k7yri4a4"]
 
+[ext_resource type="Script" uid="uid://86bvdy582a33" path="res://src/hud/hud.gd" id="1_8ej7y"]
 [ext_resource type="Script" uid="uid://u1ulksf8erwg" path="res://src/hud/clock_display.gd" id="1_ony6l"]
 [ext_resource type="Texture2D" uid="uid://c8varr3bcvycy" path="res://src/hud/alarm_clock.png" id="2_8ej7y"]
 [ext_resource type="FontFile" uid="uid://cmulgt36rw6dt" path="res://assets/fonts/tiny5/tiny5_regular.ttf" id="3_cs14m"]
+[ext_resource type="Script" uid="uid://ci2y3ew522rlt" path="res://src/hud/run_progress_bar.gd" id="5_7hkyr"]
+[ext_resource type="Texture2D" uid="uid://7i5gg2m7d7wm" path="res://src/player/player_sprite_neutral.png" id="6_uwgws"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7hkyr"]
 font = ExtResource("3_cs14m")
 font_size = 32
 font_color = Color(0.5058824, 0.65882355, 0.40392157, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0htx"]
+bg_color = Color(0.5294118, 0.61960787, 0.6392157, 0.5)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_diwb6"]
+bg_color = Color(0.5058824, 0.65882355, 0.40392157, 0.75)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="HUD" type="Control" unique_id=1962771496]
 layout_mode = 3
@@ -16,25 +33,29 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_8ej7y")
 
 [node name="ClockDisplay" type="Control" parent="." unique_id=609080886]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -115.0
+offset_top = -2.0
+offset_right = -15.0
+offset_bottom = 98.0
+grow_horizontal = 0
+script = ExtResource("1_ony6l")
+
+[node name="ClockBackground" type="TextureRect" parent="ClockDisplay" unique_id=780550129]
+self_modulate = Color(1, 1, 1, 0.75)
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -2.0
-offset_right = 15.0
-offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ony6l")
-
-[node name="ClockBackground" type="TextureRect" parent="ClockDisplay" unique_id=780550129]
-texture_filter = 1
-layout_mode = 1
-offset_right = 100.0
-offset_bottom = 100.0
 texture = ExtResource("2_8ej7y")
 expand_mode = 1
 stretch_mode = 5
@@ -55,3 +76,34 @@ text = "00:00"
 label_settings = SubResource("LabelSettings_7hkyr")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="RunProgressBar" type="ProgressBar" parent="." unique_id=593925074 node_paths=PackedStringArray("player_sprite_anchor")]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 176.0
+offset_top = 43.0
+offset_right = -176.0
+offset_bottom = 51.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_m0htx")
+theme_override_styles/fill = SubResource("StyleBoxFlat_diwb6")
+show_percentage = false
+script = ExtResource("5_7hkyr")
+player_sprite_anchor = NodePath("PlayerSpriteAnchor")
+
+[node name="PlayerSpriteAnchor" type="Control" parent="RunProgressBar" unique_id=132699031]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="PlayerSprite" type="Sprite2D" parent="RunProgressBar/PlayerSpriteAnchor" unique_id=55707107]
+position = Vector2(20, 20)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_uwgws")

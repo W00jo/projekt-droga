@@ -22,12 +22,6 @@ scale = Vector2(2.25, 2.25)
 
 [node name="ObstacleSpawner" parent="." unique_id=1927055351 instance=ExtResource("5_w7y1s")]
 
-[node name="HUD" parent="." unique_id=1962771496 instance=ExtResource("6_w7y1s")]
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=616161384]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=616161384]
-
-[node name="HUD" type="Control" parent="CanvasLayer" unique_id=535979702]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="HUD" parent="HUDLayer" unique_id=1962771496 instance=ExtResource("6_w7y1s")]
