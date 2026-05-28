@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://b7rnl3fssk0ia"]
+
+[ext_resource type="Script" uid="uid://cu8bwu18x1kd6" path="res://src/enemies/dog.gd" id="1_dm8s2"]
+[ext_resource type="Texture2D" uid="uid://nqhcarhkdy3n" path="res://src/enemies/dog_dark_sheet.png" id="2_rnald"]
+[ext_resource type="Texture2D" uid="uid://criinl5sqxk6g" path="res://src/enemies/warning.png" id="3_rnald"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m0nbb"]
+size = Vector2(104.25, 77.75)
+
+[sub_resource type="Animation" id="Animation_5nuau"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WarningSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DogSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_r5wpc"]
+resource_name = "DogRun"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DogSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 7, -0.16666667, -1.1666667, 0, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_rnald"]
+resource_name = "Flash"
+loop_mode = 1
+step = 1.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WarningSprite:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 1),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.16666667, 0.16666667, 0, 0, 1, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5wpc"]
+_data = {
+&"RESET": SubResource("Animation_5nuau"),
+&"dog_running": SubResource("Animation_r5wpc"),
+&"warning_flash": SubResource("Animation_rnald")
+}
+
+[node name="Dog" type="Area2D" unique_id=1874927133 node_paths=PackedStringArray("dog_sprite", "warning_sprite", "animation", "collision")]
+script = ExtResource("1_dm8s2")
+dog_sprite = NodePath("DogSprite")
+warning_sprite = NodePath("WarningSprite")
+animation = NodePath("AnimationPlayer")
+collision = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1178397162]
+position = Vector2(-52.125, -38.875)
+shape = SubResource("RectangleShape2D_m0nbb")
+disabled = true
+
+[node name="DogSprite" type="Sprite2D" parent="." unique_id=486330297]
+position = Vector2(-52.000004, -40.000004)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_rnald")
+hframes = 8
+frame = 6
+region_rect = Rect2(27.600197, -152.67047, 0, 6.0105286)
+
+[node name="WarningSprite" type="Sprite2D" parent="." unique_id=1955815295]
+visible = false
+position = Vector2(-39.999996, -39.999996)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("3_rnald")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=901465839]
+libraries/ = SubResource("AnimationLibrary_r5wpc")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

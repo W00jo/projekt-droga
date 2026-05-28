@@ -18,9 +18,14 @@ var active_chunks: Array[ProceduralChunk] = []
 # List of active obstacles currently rendering in the level
 var active_obstacles: Array[PoolableEntity] = []
 
+# List of active enemies currently rendering in the level
+var active_enemies: Array[PoolableEntity] = []
+
 @onready var chunks_container: Node2D = Node2D.new()
 @onready var obstacles_container: Node2D = Node2D.new()
 @onready var obstacle_spawner: ObstacleSpawner = $ObstacleSpawner
+@onready var enemies_container: Node2D = Node2D.new()
+@onready var enemy_spawner: EnemySpawner = $EnemySpawner
 
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
 
@@ -39,7 +44,11 @@ func start_run() -> void:
 	obstacles_container.name = "Obstacles"
 	add_child(obstacles_container)
 	
+	enemies_container.name = "Enemies"
+	add_child(enemies_container)
+	
 	obstacle_spawner.level = self
+	enemy_spawner.level = self
 	GameManager.level = self
 	
 	_initialise_chunk_pool()

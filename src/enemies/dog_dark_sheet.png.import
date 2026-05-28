@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nqhcarhkdy3n"
-path="res://.godot/imported/dog_1-Sheet.png-55eefee05c7ea1b37bd774c9da30f297.ctex"
+path="res://.godot/imported/dog_dark_sheet.png-31721c27a4492c18ebf1c4048c3f6ca2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/enemies/dog_1-Sheet.png"
-dest_files=["res://.godot/imported/dog_1-Sheet.png-55eefee05c7ea1b37bd774c9da30f297.ctex"]
+source_file="res://src/enemies/dog_dark_sheet.png"
+dest_files=["res://.godot/imported/dog_dark_sheet.png-31721c27a4492c18ebf1c4048c3f6ca2.ctex"]
 
 [params]
 

@@ -7,9 +7,11 @@ var _pool_configs: Dictionary = {
 	"obstacle": {
 		"scene": preload("res://src/obstacles/obstacle.tscn"),
 		"initial_size": 10
+	},
+	"dog": {
+		"scene": preload("res://src/enemies/dog.tscn"), 
+		"initial_size": 1 
 	}
-	# Example for future enemies:
-	# "dog": { "scene": preload("res://src/enemies/dog.tscn"), "initial_size": 1 }
 }
 
 # Active pools mapping type_id to an Array of PoolableEntity

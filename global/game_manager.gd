@@ -76,7 +76,7 @@ func _handle_movement_state(delta: float) -> void:
 				change_state(GameState.COASTING)
 
 		GameState.COASTING:
-			while not level.active_obstacles.is_empty():
+			while not level.active_obstacles.is_empty() or not level.active_enemies.is_empty():
 				await get_tree().create_timer(0.1).timeout
 			change_state(GameState.DECELERATING)
 
