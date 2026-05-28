@@ -8,6 +8,7 @@ var assigned_track:int
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 
+const INVINCIBILITY_DURATION: float = 3.0
 
 # Applies all visual and physical properties from the given profile
 func setup_from_profile(profile: ObstacleProfile) -> void:
@@ -25,7 +26,8 @@ func disable_collision() -> void:
 	collision_shape.set_deferred("disabled", true)
 
 # Collision callback triggered when the player enters the obstacle's area
-func _on_area_entered(_area: Area2D) -> void:
-	if _area is Player:
+func _on_area_entered(area: Area2D) -> void:
+	if area is Player:
+		area.invincibility(INVINCIBILITY_DURATION)
 		GameManager.deduct_time(10)
 		print("Player collided with obstacle")

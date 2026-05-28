@@ -31,6 +31,8 @@ const ATTACK_LUNGE_DISTANCE: float = 120.0
 const ATTACK_LUNGE_DURATION: float = 0.3
 const ATTACK_COOLDOWN: float = 5.0
 const MAX_ATTACK_COUNT: int = 3
+const TIME_PENALTY: float = 15.0
+const INVINCIBILITY_DURATION: float = 5.0
 
 const WARNING_START_POS_X: float = 300.0
 const FLASH_ANIM_DURATION: float = 5.0
@@ -70,7 +72,7 @@ func start_approach_sequence() -> void:
 	warning_sprite.visible = true
 	var _anim_tween: Tween = create_tween()
 	animation.play("warning_flash")
-	_anim_tween.tween_property(animation,"speed_scale",FLASH_ANIM_FINAL_SPEED,FLASH_ANIM_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_anim_tween.tween_property(animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, FLASH_ANIM_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await _anim_tween.finished
 	if not is_instance_valid(self) or not is_inside_tree():
 		return
@@ -197,6 +199,8 @@ func _on_area_entered(area: Area2D) -> void:
 		else:
 			player.force_track_change(player.current_track + [1,-1].pick_random())
 
+		player.invincibility(INVINCIBILITY_DURATION)
+		GameManager.deduct_time(TIME_PENALTY)
 		print("Player collided with enemy")
 
 	if area is Obstacle:

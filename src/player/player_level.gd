@@ -11,6 +11,11 @@ var stunned: bool = false
 # Reference to the parent LevelManager for track position lookups
 @onready var level_manager: LevelManager = get_parent() as LevelManager
 
+@export var invincibility_animation: AnimationPlayer
+@export var collision: CollisionShape2D
+
+const FLASH_ANIM_FINAL_SPEED: float = 1.0
+
 # Reference to the active tween to prevent animation overlap during rapid inputs
 var _movement_tween: Tween
 
@@ -51,11 +56,26 @@ func _move_to_track(target_track: int) -> void:
 func force_track_change(target_track: int) -> void:
 	_move_to_track(target_track)
 
+# Makes the player unable to move for a certain duration
 func stun(stun_time: float) -> void:
 	stunned = true
 
 	await get_tree().create_timer(stun_time).timeout
 	if not is_instance_valid(self) or not is_inside_tree():
 		return
-		
+
 	stunned = false
+	
+# Makes the player invincible for a certain duration
+func invincibility(duration: float) -> void:
+	collision.set_deferred("disabled",true)
+	invincibility_animation.speed_scale = 5.0
+	invincibility_animation.play("i_frame")
+	var _anim_tween: Tween = create_tween()
+	_anim_tween.tween_property(invincibility_animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	await _anim_tween.finished
+	if not is_instance_valid(self) or not is_inside_tree():
+		return
+
+	invincibility_animation.stop()
+	collision.set_deferred("disabled",false)
