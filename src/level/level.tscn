@@ -9,6 +9,40 @@
 [ext_resource type="Texture2D" uid="uid://byr3q1lah7opd" path="res://src/environment/bus_stop.png" id="7_5vox1"]
 [ext_resource type="Texture2D" uid="uid://bp0tq61sph64a" path="res://src/environment/bus.png" id="8_ob0n7"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ob0n7"]
+atlas = ExtResource("8_ob0n7")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p6v4a"]
+atlas = ExtResource("8_ob0n7")
+region = Rect2(0, 0, 96, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5suky"]
+atlas = ExtResource("8_ob0n7")
+region = Rect2(96, 0, 96, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k5trb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ob0n7")
+}],
+"loop": true,
+"name": &"bus_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p6v4a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5suky")
+}],
+"loop": true,
+"name": &"bus_moving",
+"speed": 10.0
+}]
+
 [sub_resource type="Animation" id="Animation_ob0n7"]
 length = 0.001
 tracks/0/type = "bezier"
@@ -21,6 +55,18 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(-300, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bus:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"bus_idle"]
 }
 
 [sub_resource type="Animation" id="Animation_p6v4a"]
@@ -37,6 +83,18 @@ tracks/0/keys = {
 "points": PackedFloat32Array(-300, -0.25, 0, 0.1272173, 333.5, 267.5, -0.17393231, -19, 0.17393231, 19, 275, -0.13333344, 0.5, 0, 0),
 "times": PackedFloat32Array(0, 2.2666667, 3)
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bus:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.266667, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [&"bus_moving", &"bus_idle", &"bus_idle"]
+}
 
 [sub_resource type="Animation" id="Animation_5suky"]
 resource_name = "bus_depart"
@@ -51,6 +109,18 @@ tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
 "points": PackedFloat32Array(275, -0.25, 0, 1.3666667, -0.5, 304.5, -0.13333333, -37, 0, 0, 1450, -0.7333331, -622.5, 0, 0),
 "times": PackedFloat32Array(0, 2, 5)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Bus:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.8333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"bus_idle", &"bus_moving"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5suky"]
@@ -97,13 +167,13 @@ position = Vector2(1571, 201)
 scale = Vector2(2.51, 2.51)
 texture = ExtResource("7_5vox1")
 
-[node name="Bus" type="Sprite2D" parent="." unique_id=817743973]
-visible = false
+[node name="Bus" type="AnimatedSprite2D" parent="." unique_id=419919061]
 z_index = 3
 position = Vector2(-300, 268)
 scale = Vector2(5.5, 5.5)
-texture = ExtResource("8_ob0n7")
-flip_h = true
+sprite_frames = SubResource("SpriteFrames_k5trb")
+animation = &"bus_idle"
+autoplay = "bus_moving"
 
 [node name="BusAnimation" type="AnimationPlayer" parent="." unique_id=1998468931]
 root_node = NodePath("../BusStop")

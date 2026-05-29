@@ -29,7 +29,7 @@ var active_enemies: Array[PoolableEntity] = []
 
 @export var player: Player
 @export var bus_stop: Sprite2D
-@export var bus: Sprite2D
+@export var bus: AnimatedSprite2D
 @export var bus_animation: AnimationPlayer 
 
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
