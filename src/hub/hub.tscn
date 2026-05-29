@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dws5mbakgqcwq" path="res://src/hub/hub_garage_door.png" id="4_lgcv4"]
 [ext_resource type="Script" uid="uid://dq7slx8aqhnrq" path="res://src/hub/garage_door.gd" id="5_0pbk3"]
 [ext_resource type="PackedScene" uid="uid://c722vntaki1rg" path="res://src/player/player_wasd.tscn" id="5_r4qrh"]
+[ext_resource type="PackedScene" uid="uid://c1cpa0rt0pf8v" path="res://src/ui/virtual_joystick.tscn" id="8_0pbk3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wj811"]
 atlas = ExtResource("1_8xbvn")
@@ -254,6 +255,10 @@ shape = SubResource("SegmentShape2D_yo4oc")
 [node name="PlayerWASD" parent="." unique_id=916138121 instance=ExtResource("5_r4qrh")]
 position = Vector2(564, 378)
 scale = Vector2(2.2, 2.2)
+
+[node name="TouchControlsLayer" type="CanvasLayer" parent="." unique_id=1918395361]
+
+[node name="VirtualJoystick" parent="TouchControlsLayer" unique_id=1331493295 instance=ExtResource("8_0pbk3")]
 
 [connection signal="body_entered" from="AreaDoor" to="AreaDoor" method="_on_body_entered"]
 [connection signal="body_exited" from="AreaDoor" to="AreaDoor" method="_on_body_exited"]

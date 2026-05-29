@@ -33,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_8ej7y")
 
 [node name="ClockDisplay" type="Control" parent="." unique_id=609080886]
@@ -45,6 +46,7 @@ offset_top = -2.0
 offset_right = -15.0
 offset_bottom = 98.0
 grow_horizontal = 0
+mouse_filter = 2
 script = ExtResource("1_ony6l")
 
 [node name="ClockBackground" type="TextureRect" parent="ClockDisplay" unique_id=780550129]
@@ -56,6 +58,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("2_8ej7y")
 expand_mode = 1
 stretch_mode = 5
@@ -87,6 +90,7 @@ offset_top = 43.0
 offset_right = -176.0
 offset_bottom = 51.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_m0htx")
 theme_override_styles/fill = SubResource("StyleBoxFlat_diwb6")
 show_percentage = false
@@ -102,6 +106,7 @@ offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="PlayerSprite" type="Sprite2D" parent="RunProgressBar/PlayerSpriteAnchor" unique_id=55707107]
 position = Vector2(20, 20)

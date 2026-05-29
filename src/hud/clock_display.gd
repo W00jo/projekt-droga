@@ -39,6 +39,7 @@ func _on_time_deducted(amount: float) -> void:
 	floating_label.text = "-%.0f S" % amount
 	floating_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	floating_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	floating_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	var bg: TextureRect = $ClockBackground as TextureRect
 	bg.add_child(floating_label)
