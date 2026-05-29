@@ -74,7 +74,9 @@ jobs:
           mkdir -p build/web
           # "Web" refers to the exact preset name defined in export_presets.cfg
           godot --headless --export-release "Web" build/web/index.html
-
+          
+          echo "[INFO] Generating CNAME file for custom domain..."
+          echo "zatrzymaninastarcie.pl" > build/web/CNAME
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
