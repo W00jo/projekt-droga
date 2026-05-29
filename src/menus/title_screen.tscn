@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cxjp7487wrc25"]
 
-[ext_resource type="Texture2D" uid="uid://j5drm16wq4sp" path="res://assets/placeholder.png" id="1_ok4yg"]
 [ext_resource type="Script" uid="uid://b5vveykjjwg8w" path="res://src/menus/title_screen.gd" id="1_r6esh"]
+[ext_resource type="Texture2D" uid="uid://cq26u7c1kus62" path="res://assets/logo.png" id="2_r6esh"]
 
 [sub_resource type="Animation" id="Animation_r6esh"]
 length = 0.001
@@ -66,14 +66,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -220.0
-offset_right = 220.0
-offset_bottom = 220.0
+offset_left = -613.0
+offset_top = -227.0
+offset_right = 613.0
+offset_bottom = 227.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ok4yg")
-stretch_mode = 4
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(613, 227)
+texture = ExtResource("2_r6esh")
+stretch_mode = 5
 
 [node name="PressAnyKey" type="Label" parent="." unique_id=766653336]
 layout_mode = 1
@@ -88,7 +90,7 @@ offset_right = 61.0
 offset_bottom = -49.0
 grow_horizontal = 2
 grow_vertical = 0
-text = "PRESS_ANY_KEY"
+text = "WCIŚNIJ DOWOLNY KLAWISZ"
 horizontal_alignment = 1
 vertical_alignment = 1
 

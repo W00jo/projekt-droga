@@ -191,9 +191,10 @@ animations = [{
 a = Vector2(-123, 0)
 b = Vector2(131, 0)
 
-[node name="Hub" type="StaticBody2D" unique_id=769936134 node_paths=PackedStringArray("player")]
+[node name="Hub" type="StaticBody2D" unique_id=769936134 node_paths=PackedStringArray("player", "garage_door_sprite")]
 script = ExtResource("1_r4qrh")
 player = NodePath("PlayerWASD")
+garage_door_sprite = NodePath("AreaGarageDoor/SpriteGarageDoor")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1663058610]
 build_mode = 1
@@ -253,7 +254,7 @@ position = Vector2(-6, 85)
 shape = SubResource("SegmentShape2D_yo4oc")
 
 [node name="PlayerWASD" parent="." unique_id=916138121 instance=ExtResource("5_r4qrh")]
-position = Vector2(564, 378)
+position = Vector2(560, 380)
 scale = Vector2(2.2, 2.2)
 
 [node name="TouchControlsLayer" type="CanvasLayer" parent="." unique_id=1918395361]

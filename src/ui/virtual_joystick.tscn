@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c1cpa0rt0pf8v"]
 
 [ext_resource type="Script" uid="uid://4n6ewodjy5rv" path="res://src/ui/virtual_joystick.gd" id="1_md1s1"]
-[ext_resource type="Texture2D" uid="uid://g72do0ftsld6" path="res://icon.svg" id="1_sl7rs"]
+[ext_resource type="Texture2D" uid="uid://dfel0t6qqicyf" path="res://src/hub/joystick_base.png" id="2_7yan0"]
+[ext_resource type="Texture2D" uid="uid://cx55umi4n61kx" path="res://src/hub/joystick_knob.png" id="3_gtm8q"]
 
 [node name="VirtualJoystick" type="Control" unique_id=1331493295]
 layout_mode = 3
@@ -19,7 +20,7 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 mouse_filter = 2
-texture = ExtResource("1_sl7rs")
+texture = ExtResource("2_7yan0")
 expand_mode = 1
 stretch_mode = 5
 
@@ -29,6 +30,6 @@ layout_mode = 0
 offset_right = 64.0
 offset_bottom = 64.0
 mouse_filter = 2
-texture = ExtResource("1_sl7rs")
+texture = ExtResource("3_gtm8q")
 expand_mode = 1
 stretch_mode = 5

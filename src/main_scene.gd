@@ -10,6 +10,8 @@ func _ready() -> void:
 	GameManager.main_scene = self
 	title_screen.connect("title_screen_killed", toggle_hub_player_movement)
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	
 	hub.show()
 	level.hide()
 
@@ -28,3 +30,12 @@ func exit_hub_and_start_run() -> void:
 
 func toggle_hub_player_movement(toggle: bool) -> void:
 	hub.player.is_active = toggle
+
+func return_to_hub() -> void:
+	hub.show()
+	level.hide()
+	
+	hub.reset_hub()
+	toggle_hub_player_movement(true)
+	
+	level.reset_level()

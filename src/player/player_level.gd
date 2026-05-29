@@ -13,6 +13,7 @@ var stunned: bool = false
 
 @export var invincibility_animation: AnimationPlayer
 @export var collision: CollisionShape2D
+@export var sprite_animation: AnimationPlayer
 
 # Minimum vertical drag distance (in pixels) required to register a swipe
 const SWIPE_THRESHOLD: float = 30.0

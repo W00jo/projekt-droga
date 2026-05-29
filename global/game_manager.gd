@@ -82,7 +82,7 @@ func _handle_movement_state(delta: float) -> void:
 			change_state(GameState.DECELERATING)
 
 		GameState.DECELERATING:
-			current_scroll_speed = move_toward(current_scroll_speed, 0.0, acceleration_rate * delta)
+			current_scroll_speed = move_toward(current_scroll_speed, 0.0, (acceleration_rate) * delta)
 			speed_changed.emit(current_scroll_speed)
 			if is_equal_approx(current_scroll_speed, 0.0):
 				change_state(GameState.ARRIVED)
@@ -91,6 +91,7 @@ func _handle_movement_state(delta: float) -> void:
 			# Decelerate at triple the normal rate to convey urgency
 			current_scroll_speed = move_toward(current_scroll_speed, 0.0, (acceleration_rate * 3) * delta)
 			speed_changed.emit(current_scroll_speed)
+			await get_tree().create_timer(1).timeout
 
 # Accumulates distance covered this frame and emits progress signals
 func _update_distance(delta: float) -> void:

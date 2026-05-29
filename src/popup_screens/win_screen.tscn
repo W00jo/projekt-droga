@@ -1,0 +1,124 @@
+[gd_scene format=3 uid="uid://clhcx4fr1bwdi"]
+
+[ext_resource type="Script" uid="uid://de63l0nq016ug" path="res://src/popup_screens/popup.gd" id="1_enkew"]
+[ext_resource type="Shader" uid="uid://cylqp104717ly" path="res://assets/blur.gdshader" id="1_sdsa0"]
+[ext_resource type="Texture2D" uid="uid://ddqsarxhon8we" path="res://src/popup_screens/popup_box.png" id="2_qtakq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtakq"]
+shader = ExtResource("1_sdsa0")
+shader_parameter/lod = 2.50000011875
+
+[sub_resource type="LabelSettings" id="LabelSettings_0xbog"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_enkew"]
+font_size = 64
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_baf0e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_enkew"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0xbog"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_waqix"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3fnoe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x80ns"]
+
+[node name="WinScreen" type="Control" unique_id=817025814]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_enkew")
+
+[node name="Blur" type="ColorRect" parent="." unique_id=1183370939]
+material = SubResource("ShaderMaterial_qtakq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Darken" type="ColorRect" parent="." unique_id=1421626171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.29411766)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=919021598]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -351.0
+offset_top = -165.25
+offset_right = 351.0
+offset_bottom = 165.25
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_qtakq")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect" unique_id=1577450862]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 27
+
+[node name="UpperText" type="Label" parent="NinePatchRect/VBoxContainer" unique_id=2001505267]
+layout_mode = 2
+text = "UDAŁO SIĘ!"
+label_settings = SubResource("LabelSettings_0xbog")
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer" unique_id=1567412901]
+layout_mode = 2
+theme_override_constants/separation = 75
+
+[node name="YourTimeText" type="Label" parent="NinePatchRect/VBoxContainer/HBoxContainer" unique_id=300117390]
+layout_mode = 2
+text = "TWÓJ CZAS"
+label_settings = SubResource("LabelSettings_enkew")
+
+[node name="TimeLabel" type="Label" parent="NinePatchRect/VBoxContainer/HBoxContainer" unique_id=1424511214]
+unique_name_in_owner = true
+layout_mode = 2
+text = "00:00"
+label_settings = SubResource("LabelSettings_enkew")
+
+[node name="PlayAgainButton" type="Button" parent="NinePatchRect/VBoxContainer" unique_id=1157860673]
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.49411765, 0.7411765, 1, 1)
+theme_override_colors/icon_pressed_color = Color(0.3019608, 0.45490196, 1, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_baf0e")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_enkew")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0xbog")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_waqix")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3fnoe")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x80ns")
+text = "ZAGRAJ JESZCZE RAZ"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

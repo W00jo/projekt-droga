@@ -31,6 +31,8 @@ var active_enemies: Array[PoolableEntity] = []
 @export var bus_stop: Sprite2D
 @export var bus: AnimatedSprite2D
 @export var bus_animation: AnimationPlayer 
+@export var win_screen: Control
+@export var lose_screen: Control
 
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
 
@@ -58,7 +60,8 @@ func start_run() -> void:
 	
 	_initialise_chunk_pool()
 	
-	GameManager.state_changed.connect(_bus_arrive_sequence)
+	#GameManager.state_changed.connect(_bus_arrive_sequence)
+	GameManager.state_changed.connect(_on_state_changed)
 
 func _process(delta: float) -> void:
 	if GameManager.current_state != GameManager.GameState.INACTIVE:
@@ -115,8 +118,17 @@ func _scroll_environment(delta: float) -> void:
 	if GameManager.current_state == GameManager.GameState.DECELERATING:
 		bus_stop.position.x -= global_speed * delta
 
-func _bus_arrive_sequence(new_state: GameManager.GameState) -> void:
+func _on_state_changed(new_state: GameManager.GameState) -> void:
 	if new_state == GameManager.GameState.DECELERATING:
+		_show_bus_stop()
+	elif new_state == GameManager.GameState.ARRIVED:
+		_bus_arrive_sequence()
+	elif new_state == GameManager.GameState.FAILED:
+		player.sprite_animation.play("idle")
+		await get_tree().create_timer(3).timeout
+		lose_screen.show_popup_and_cursor()
+
+func _show_bus_stop() -> void:
 		bus_stop.visible = true
 		bus.visible = true
 		while player.current_track != 1:
@@ -125,11 +137,18 @@ func _bus_arrive_sequence(new_state: GameManager.GameState) -> void:
 			if not is_instance_valid(self) or not is_inside_tree():
 				return
 
-	elif new_state == GameManager.GameState.ARRIVED:
+func _bus_arrive_sequence() -> void:
+		player.sprite_animation.play("idle")
 		bus_animation.play("bus_arrive")
 		await bus_animation.animation_finished
 		if not is_instance_valid(self) or not is_inside_tree():
 			return
-
+		
 		player.visible = false
 		bus_animation.play("bus_depart")
+		await bus_animation.animation_finished
+		win_screen.show_popup_and_cursor()
+		win_screen.display_completion_time()
+
+func reset_level() -> void:
+	pass

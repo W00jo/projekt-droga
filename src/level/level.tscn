@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://dpl32k7yri4a4" path="res://src/hud/hud.tscn" id="6_w7y1s"]
 [ext_resource type="Texture2D" uid="uid://byr3q1lah7opd" path="res://src/environment/bus_stop.png" id="7_5vox1"]
 [ext_resource type="Texture2D" uid="uid://bp0tq61sph64a" path="res://src/environment/bus.png" id="8_ob0n7"]
+[ext_resource type="PackedScene" uid="uid://clhcx4fr1bwdi" path="res://src/popup_screens/win_screen.tscn" id="9_p6v4a"]
+[ext_resource type="PackedScene" uid="uid://6mon24qx7tjq" path="res://src/popup_screens/lose_screen.tscn" id="10_5suky"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ob0n7"]
 atlas = ExtResource("8_ob0n7")
@@ -130,12 +132,14 @@ _data = {
 &"bus_depart": SubResource("Animation_5suky")
 }
 
-[node name="Level" type="Node2D" unique_id=1874155512 node_paths=PackedStringArray("player", "bus_stop", "bus", "bus_animation")]
+[node name="Level" type="Node2D" unique_id=1874155512 node_paths=PackedStringArray("player", "bus_stop", "bus", "bus_animation", "win_screen", "lose_screen")]
 script = ExtResource("1_af42n")
 player = NodePath("PlayerLevel")
 bus_stop = NodePath("BusStop")
 bus = NodePath("Bus")
 bus_animation = NodePath("BusAnimation")
+win_screen = NodePath("PopupLayer/WinScreen")
+lose_screen = NodePath("PopupLayer/LoseScreen")
 
 [node name="BackgroundPlaceholder" type="Polygon2D" parent="." unique_id=2060795983]
 visible = false
@@ -155,10 +159,6 @@ scale = Vector2(2.25, 2.25)
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=616161384]
 
 [node name="HUD" parent="HUDLayer" unique_id=1962771496 instance=ExtResource("6_w7y1s")]
-offset_left = 12.0
-offset_top = -8.0
-offset_right = 12.0
-offset_bottom = -8.0
 
 [node name="BusStop" type="Sprite2D" parent="." unique_id=382363523]
 visible = false
@@ -178,3 +178,11 @@ autoplay = "bus_moving"
 [node name="BusAnimation" type="AnimationPlayer" parent="." unique_id=1998468931]
 root_node = NodePath("../BusStop")
 libraries/ = SubResource("AnimationLibrary_5suky")
+
+[node name="PopupLayer" type="CanvasLayer" parent="." unique_id=771053196]
+
+[node name="WinScreen" parent="PopupLayer" unique_id=817025814 instance=ExtResource("9_p6v4a")]
+visible = false
+
+[node name="LoseScreen" parent="PopupLayer" unique_id=762810705 instance=ExtResource("10_5suky")]
+visible = false

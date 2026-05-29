@@ -3,9 +3,6 @@ extends Control
 
 signal title_screen_killed
 
-func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey or event is InputEventMouseButton or event is InputEventScreenTouch or event is InputEventJoypadButton:
 		if event.is_released() and not event.is_echo():
