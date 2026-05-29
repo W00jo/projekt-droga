@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c8varr3bcvycy" path="res://src/hud/alarm_clock.png" id="2_8ej7y"]
 [ext_resource type="FontFile" uid="uid://cmulgt36rw6dt" path="res://assets/fonts/tiny5/tiny5_regular.ttf" id="3_cs14m"]
 [ext_resource type="Script" uid="uid://ci2y3ew522rlt" path="res://src/hud/run_progress_bar.gd" id="5_7hkyr"]
-[ext_resource type="Texture2D" uid="uid://7i5gg2m7d7wm" path="res://src/player/player_sprite_neutral.png" id="6_uwgws"]
+[ext_resource type="Texture2D" uid="uid://bb8lvm71tjvan" path="res://src/player/player_run_spritesheet.png" id="6_7hkyr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7hkyr"]
 font = ExtResource("3_cs14m")
@@ -25,6 +25,83 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyaa0"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(0, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp7pi"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(37, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwgt2"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(74, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vas"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(111, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smibv"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(148, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lirfv"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(185, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2jgm"]
+atlas = ExtResource("6_7hkyr")
+region = Rect2(222, 0, 37, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uwgws"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyaa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwgt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smibv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lirfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2jgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lirfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smibv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwgt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7pi")
+}],
+"loop": true,
+"name": &"run",
+"speed": 13.0
+}]
 
 [node name="HUD" type="Control" unique_id=1962771496]
 layout_mode = 3
@@ -108,7 +185,9 @@ offset_bottom = 20.0
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="PlayerSprite" type="Sprite2D" parent="RunProgressBar/PlayerSpriteAnchor" unique_id=55707107]
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="RunProgressBar/PlayerSpriteAnchor" unique_id=827063904]
 position = Vector2(20, 20)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("6_uwgws")
+scale = Vector2(0.625, 0.625)
+sprite_frames = SubResource("SpriteFrames_uwgws")
+animation = &"run"
+autoplay = "run"
