@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://dw6ftfrxjgb0g" path="res://src/environment/countryside_parallax/layer_5_fence.png" id="9_gglmi"]
 [ext_resource type="Texture2D" uid="uid://d4glk1g3rar76" path="res://src/environment/birch_tree.png" id="9_hdms4"]
 [ext_resource type="Texture2D" uid="uid://cdlw5mwq76fbu" path="res://src/environment/flower_red.png" id="10_f3hmt"]
+[ext_resource type="Texture2D" uid="uid://drx4ddomc2c5m" path="res://src/environment/blue_house_r1.png" id="11_a0v4x"]
 [ext_resource type="Texture2D" uid="uid://clq14eesepd5" path="res://src/environment/flower_blue.png" id="11_w2ylu"]
+[ext_resource type="Texture2D" uid="uid://c2737vpme31qh" path="res://src/environment/brown_house.png" id="12_l2igq"]
 [ext_resource type="Texture2D" uid="uid://dovt2g4ahl6fy" path="res://src/environment/flower_purple.png" id="13_qk5f4"]
 [ext_resource type="Texture2D" uid="uid://b6m4nuhiivu70" path="res://src/environment/bush_1.png" id="15_fmhvi"]
 [ext_resource type="Texture2D" uid="uid://dbhm84ow6pbc2" path="res://src/environment/boulders.png" id="16_gglmi"]
@@ -20,13 +22,14 @@
 [ext_resource type="Texture2D" uid="uid://cmmlu78k2tixj" path="res://src/environment/lamp_post.png" id="17_fmhvi"]
 [ext_resource type="Texture2D" uid="uid://bu3qoyyf31rw8" path="res://src/environment/countryside_parallax/layer_6_grass.png" id="19_dn6jc"]
 
-[node name="CountrysideParallaxBg" type="Node2D" unique_id=483123916 node_paths=PackedStringArray("layer_sky", "layer_forest_far", "layer_forest_near", "layer_field", "layer_items", "layer_fence", "layer_grass")]
+[node name="CountrysideParallaxBg" type="Node2D" unique_id=483123916 node_paths=PackedStringArray("layer_sky", "layer_forest_far", "layer_forest_near", "layer_field", "layer_items", "layer_houses", "layer_fence", "layer_grass")]
 script = ExtResource("5_dynpx")
 layer_sky = NodePath("Sky")
 layer_forest_far = NodePath("Forest")
 layer_forest_near = NodePath("Forest2")
 layer_field = NodePath("Field")
 layer_items = NodePath("Items")
+layer_houses = NodePath("Houses")
 layer_fence = NodePath("Fence")
 layer_grass = NodePath("Grass")
 
@@ -82,20 +85,31 @@ texture = ExtResource("6_dn6jc")
 position = Vector2(1115, 347)
 texture = ExtResource("7_dn6jc")
 
-[node name="Items" type="Parallax2D" parent="." unique_id=921589016]
+[node name="Houses" type="Parallax2D" parent="." unique_id=2097525420]
 scroll_offset = Vector2(-1146, -101)
-repeat_size = Vector2(4608, 0)
+repeat_size = Vector2(6876, 0)
 autoscroll = Vector2(-70, 0)
 
-[node name="BrickHouse" type="Sprite2D" parent="Items" unique_id=1626012362]
-position = Vector2(4279, 261)
+[node name="BlueHouse" type="Sprite2D" parent="Houses" unique_id=1145978326]
+position = Vector2(2009, 261)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("11_a0v4x")
+flip_h = true
+
+[node name="BrownHouse" type="Sprite2D" parent="Houses" unique_id=2003771501]
+position = Vector2(3994, 261)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("12_l2igq")
+
+[node name="BrickHouse" type="Sprite2D" parent="Houses" unique_id=1532150472]
+position = Vector2(6155, 261)
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("8_tkuoi")
 
-[node name="BrickHouse2" type="Sprite2D" parent="Items" unique_id=2022878104]
-position = Vector2(2009, 261)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("8_tkuoi")
+[node name="Items" type="Parallax2D" parent="." unique_id=921589016]
+scroll_offset = Vector2(-1146, -101)
+repeat_size = Vector2(9214, 0)
+autoscroll = Vector2(-70, 0)
 
 [node name="Tractor" type="Sprite2D" parent="Items" unique_id=147589616]
 position = Vector2(2525, 304)
@@ -112,7 +126,7 @@ repeat_size = Vector2(9216, 0)
 autoscroll = Vector2(-250, 0)
 
 [node name="Fences" type="Sprite2D" parent="Fence" unique_id=120390213]
-position = Vector2(4807, 207)
+position = Vector2(4578.0005, 207)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("9_gglmi")
 

@@ -11,6 +11,7 @@ extends Node2D
 @export var layer_forest_near: Parallax2D
 @export var layer_field: Parallax2D
 @export var layer_items: Parallax2D
+@export var layer_houses: Parallax2D
 @export var layer_fence: Parallax2D
 @export var layer_grass: Parallax2D
 
@@ -20,7 +21,8 @@ const MULTIPLIER_SKY: float = 0.1   # E.g., Sky
 const MULTIPLIER_FOREST_FAR: float = 0.15  # Darker forest on the horizon
 const MULTIPLIER_FOREST_NEAR: float = 0.25 # Lighter forest on the horizon
 const MULTIPLIER_FIELD: float = 0.45       # Field and bushes
-const MULTIPLIER_ITEMS: float = 0.75       # E.g., Houses, buildings, trees, tractors etc.
+const MULTIPLIER_ITEMS: float = 0.75       # E.g., buildings, trees, tractors etc.
+const MULTIPLIER_HOUSES: float = 0.75      # Houses
 const MULTIPLIER_FENCE: float = 1.0        # Fences and very near items
 const MULTIPLIER_GRASS: float = 1.0        # Grass in the front
 
@@ -35,5 +37,6 @@ func _process(_delta: float) -> void:
 	layer_forest_near.autoscroll.x = -base_speed * MULTIPLIER_FOREST_NEAR
 	layer_field.autoscroll.x = -base_speed * MULTIPLIER_FIELD
 	layer_items.autoscroll.x = -base_speed * MULTIPLIER_ITEMS
+	layer_houses.autoscroll.x = -base_speed * MULTIPLIER_HOUSES
 	layer_fence.autoscroll.x = -base_speed * MULTIPLIER_FENCE
 	layer_grass.autoscroll.x = -base_speed * MULTIPLIER_GRASS
