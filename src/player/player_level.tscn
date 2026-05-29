@@ -2,6 +2,84 @@
 
 [ext_resource type="Script" uid="uid://b1e7jjabrl002" path="res://src/player/player_level.gd" id="1_1bh1q"]
 [ext_resource type="Texture2D" uid="uid://7i5gg2m7d7wm" path="res://src/player/player_sprite_neutral.png" id="1_snsot"]
+[ext_resource type="Texture2D" uid="uid://bb8lvm71tjvan" path="res://src/player/player_run_spritesheet.png" id="2_3w1mt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyaa0"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(0, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp7pi"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(37, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwgt2"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(74, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t4vas"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(111, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smibv"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(148, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lirfv"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(185, 0, 37, 62)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2jgm"]
+atlas = ExtResource("2_3w1mt")
+region = Rect2(222, 0, 37, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x4ebd"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyaa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwgt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smibv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lirfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2jgm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lirfv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smibv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t4vas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwgt2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp7pi")
+}],
+"loop": true,
+"name": &"run",
+"speed": 13.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1bh1q"]
 radius = 9.5
@@ -47,7 +125,15 @@ script = ExtResource("1_1bh1q")
 invincibility_animation = NodePath("InvincibilityFlashAnimation")
 collision = NodePath("CollisionShape2D")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1270188578]
+position = Vector2(0, -31)
+sprite_frames = SubResource("SpriteFrames_x4ebd")
+animation = &"run"
+autoplay = "run"
+frame_progress = 0.9224073
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=346377080]
+visible = false
 position = Vector2(0, -31)
 texture = ExtResource("1_snsot")
 
