@@ -27,7 +27,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	# Block input when the run has concluded
 	var state: GameManager.GameState = GameManager.current_state
-	if state == GameManager.GameState.DECELERATING or state == GameManager.GameState.FAILED or stunned:
+	if state in [GameManager.GameState.DECELERATING, GameManager.GameState.FAILED, GameManager.GameState.ARRIVED] or stunned:
 		return
 		
 	if Input.is_action_just_pressed("move_up"):
@@ -72,7 +72,7 @@ func invincibility(duration: float) -> void:
 	invincibility_animation.speed_scale = 5.0
 	invincibility_animation.play("i_frame")
 	var _anim_tween: Tween = create_tween()
-	_anim_tween.tween_property(invincibility_animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	_anim_tween.tween_property(invincibility_animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
 	await _anim_tween.finished
 	if not is_instance_valid(self) or not is_inside_tree():
 		return

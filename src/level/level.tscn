@@ -6,9 +6,66 @@
 [ext_resource type="PackedScene" uid="uid://b4bhty4d4qtqa" path="res://src/enemies/enemy_spawner.tscn" id="5_5vox1"]
 [ext_resource type="PackedScene" uid="uid://iwhr4ou0u28m" path="res://src/obstacles/obstacle_spawner.tscn" id="5_w7y1s"]
 [ext_resource type="PackedScene" uid="uid://dpl32k7yri4a4" path="res://src/hud/hud.tscn" id="6_w7y1s"]
+[ext_resource type="Texture2D" uid="uid://byr3q1lah7opd" path="res://src/environment/bus_stop.png" id="7_5vox1"]
+[ext_resource type="Texture2D" uid="uid://bp0tq61sph64a" path="res://src/environment/bus.png" id="8_ob0n7"]
 
-[node name="Level" type="Node2D" unique_id=1874155512]
+[sub_resource type="Animation" id="Animation_ob0n7"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bus:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-300, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_p6v4a"]
+resource_name = "bus_arrive"
+length = 3.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bus:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 3, 0),
+"points": PackedFloat32Array(-300, -0.25, 0, 0.1272173, 333.5, 267.5, -0.17393231, -19, 0.17393231, 19, 275, -0.13333344, 0.5, 0, 0),
+"times": PackedFloat32Array(0, 2.2666667, 3)
+}
+
+[sub_resource type="Animation" id="Animation_5suky"]
+resource_name = "bus_depart"
+length = 5.0
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Bus:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(275, -0.25, 0, 1.3666667, -0.5, 304.5, -0.13333333, -37, 0, 0, 1450, -0.7333331, -622.5, 0, 0),
+"times": PackedFloat32Array(0, 2, 5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5suky"]
+_data = {
+&"RESET": SubResource("Animation_ob0n7"),
+&"bus_arrive": SubResource("Animation_p6v4a"),
+&"bus_depart": SubResource("Animation_5suky")
+}
+
+[node name="Level" type="Node2D" unique_id=1874155512 node_paths=PackedStringArray("player", "bus_stop", "bus", "bus_animation")]
 script = ExtResource("1_af42n")
+player = NodePath("PlayerLevel")
+bus_stop = NodePath("BusStop")
+bus = NodePath("Bus")
+bus_animation = NodePath("BusAnimation")
 
 [node name="BackgroundPlaceholder" type="Polygon2D" parent="." unique_id=2060795983]
 visible = false
@@ -28,3 +85,26 @@ scale = Vector2(2.25, 2.25)
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=616161384]
 
 [node name="HUD" parent="HUDLayer" unique_id=1962771496 instance=ExtResource("6_w7y1s")]
+offset_left = 12.0
+offset_top = -8.0
+offset_right = 12.0
+offset_bottom = -8.0
+
+[node name="BusStop" type="Sprite2D" parent="." unique_id=382363523]
+visible = false
+z_index = 1
+position = Vector2(1571, 201)
+scale = Vector2(2.51, 2.51)
+texture = ExtResource("7_5vox1")
+
+[node name="Bus" type="Sprite2D" parent="." unique_id=817743973]
+visible = false
+z_index = 3
+position = Vector2(-300, 268)
+scale = Vector2(5.5, 5.5)
+texture = ExtResource("8_ob0n7")
+flip_h = true
+
+[node name="BusAnimation" type="AnimationPlayer" parent="." unique_id=1998468931]
+root_node = NodePath("../BusStop")
+libraries/ = SubResource("AnimationLibrary_5suky")

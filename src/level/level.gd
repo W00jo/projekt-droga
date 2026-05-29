@@ -27,6 +27,11 @@ var active_enemies: Array[PoolableEntity] = []
 @onready var enemies_container: Node2D = Node2D.new()
 @onready var enemy_spawner: EnemySpawner = $EnemySpawner
 
+@export var player: Player
+@export var bus_stop: Sprite2D
+@export var bus: Sprite2D
+@export var bus_animation: AnimationPlayer 
+
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
 
 # Configuration for the spatial origin of the endless environment
@@ -52,6 +57,8 @@ func start_run() -> void:
 	GameManager.level = self
 	
 	_initialise_chunk_pool()
+	
+	GameManager.state_changed.connect(_bus_arrive_sequence)
 
 func _process(delta: float) -> void:
 	if GameManager.current_state != GameManager.GameState.INACTIVE:
@@ -104,3 +111,25 @@ func _scroll_environment(delta: float) -> void:
 		if obstacle.position.x < OFFSCREEN_THRESHOLD:
 			PoolManager.release_instance("obstacle", obstacle)
 			active_obstacles.remove_at(i)
+			
+	if GameManager.current_state == GameManager.GameState.DECELERATING:
+		bus_stop.position.x -= global_speed * delta
+
+func _bus_arrive_sequence(new_state: GameManager.GameState) -> void:
+	if new_state == GameManager.GameState.DECELERATING:
+		bus_stop.visible = true
+		bus.visible = true
+		while player.current_track != 1:
+			player.force_track_change(player.current_track-1)
+			await get_tree().create_timer(0.3).timeout
+			if not is_instance_valid(self) or not is_inside_tree():
+				return
+
+	elif new_state == GameManager.GameState.ARRIVED:
+		bus_animation.play("bus_arrive")
+		await bus_animation.animation_finished
+		if not is_instance_valid(self) or not is_inside_tree():
+			return
+
+		player.visible = false
+		bus_animation.play("bus_depart")

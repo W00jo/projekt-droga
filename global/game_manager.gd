@@ -6,6 +6,7 @@ enum GameState {
 	RUNNING,      # The player is at the target speed; obstacles and enemies spawn normally
 	COASTING,     # The player has reached the target distance
 	DECELERATING, # The player is slowing down to the bus stop
+	ARRIVED,      # The player has arrived at the bus stop
 	FAILED        # The timer has run out before reaching the target distance
 }
 
@@ -83,6 +84,8 @@ func _handle_movement_state(delta: float) -> void:
 		GameState.DECELERATING:
 			current_scroll_speed = move_toward(current_scroll_speed, 0.0, acceleration_rate * delta)
 			speed_changed.emit(current_scroll_speed)
+			if is_equal_approx(current_scroll_speed, 0.0):
+				change_state(GameState.ARRIVED)
 
 		GameState.FAILED:
 			# Decelerate at triple the normal rate to convey urgency
