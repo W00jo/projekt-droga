@@ -36,6 +36,24 @@ func _ready() -> void:
 	position.y = level_manager.get_track_position_y(current_track)
 	z_index = current_track + 1
 
+func _process(_delta: float) -> void:
+	if sprite_animation.current_animation == "run":
+		# The run animation remains at standard speed until we reach the bus stop
+		if GameManager.current_state == GameManager.GameState.DECELERATING:
+			var speed_ratio: float = GameManager.current_scroll_speed / GameManager.target_scroll_speed
+			
+			# Transition to the exhausted animation early so the player slides to a halt naturally
+			if speed_ratio < 0.2:
+				sprite_animation.play("stop")
+				sprite_animation.speed_scale = 1.0
+			else:
+				# Scale down the animation to match the background slowing down
+				sprite_animation.speed_scale = max(0.1, speed_ratio)
+		else:
+			sprite_animation.speed_scale = 1.0
+	else:
+		sprite_animation.speed_scale = 1.0
+
 # Uses _unhandled_input instead of _input so that UI elements (buttons, menus,
 # the virtual joystick) consume their touch events first. Only events that no
 # UI node has claimed will reach this function, preventing accidental lane

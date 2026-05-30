@@ -127,7 +127,7 @@ func _on_state_changed(new_state: GameManager.GameState) -> void:
 	elif new_state == GameManager.GameState.ARRIVED:
 		_bus_arrive_sequence()
 	elif new_state == GameManager.GameState.FAILED:
-		player.sprite_animation.play("idle")
+		player.sprite_animation.play("stop")
 		await get_tree().create_timer(3).timeout
 		lose_screen.show_popup_and_cursor()
 
@@ -141,7 +141,7 @@ func _show_bus_stop() -> void:
 			return
 
 func _bus_arrive_sequence() -> void:
-	player.sprite_animation.play("idle")
+	player.sprite_animation.play("stop")
 	bus_animation.play("bus_arrive")
 	await bus_animation.animation_finished
 	if not is_instance_valid(self) or not is_inside_tree():
