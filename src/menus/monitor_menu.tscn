@@ -1,0 +1,168 @@
+[gd_scene format=3 uid="uid://cuyljyacuuejg"]
+
+[ext_resource type="Script" uid="uid://dc525a8l77sam" path="res://src/menus/monitor_menu.gd" id="1_l0c5a"]
+[ext_resource type="Shader" uid="uid://cylqp104717ly" path="res://assets/blur.gdshader" id="1_xt015"]
+[ext_resource type="Texture2D" uid="uid://w45x53dwfjfa" path="res://src/menus/monitor_box.png" id="2_8egol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8egol"]
+shader = ExtResource("1_xt015")
+shader_parameter/lod = 1.5000000712500001
+
+[sub_resource type="LabelSettings" id="LabelSettings_8egol"]
+font_size = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8egol"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l0c5a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qnvti"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gi462"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vhoq"]
+
+[node name="MonitorMenu" type="CanvasLayer" unique_id=234380079]
+visible = false
+script = ExtResource("1_l0c5a")
+
+[node name="Control" type="Control" parent="." unique_id=1381631743]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blur" type="ColorRect" parent="Control" unique_id=1542219159]
+material = SubResource("ShaderMaterial_8egol")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1341058008]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -396.0
+offset_top = -291.0
+offset_right = 396.0
+offset_bottom = 291.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8egol")
+patch_margin_left = 96
+patch_margin_top = 96
+patch_margin_right = 96
+patch_margin_bottom = 96
+
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect" unique_id=135205729]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -281.75
+offset_top = -171.0
+offset_right = 281.75
+offset_bottom = 205.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 25
+
+[node name="Settings" type="VBoxContainer" parent="NinePatchRect/HBoxContainer" unique_id=2128540367]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 74
+
+[node name="SettingsText" type="Label" parent="NinePatchRect/HBoxContainer/Settings" unique_id=595321433]
+layout_mode = 2
+text = "Ustawienia"
+label_settings = SubResource("LabelSettings_8egol")
+horizontal_alignment = 1
+
+[node name="Music" type="MarginContainer" parent="NinePatchRect/HBoxContainer/Settings" unique_id=1669236346]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/HBoxContainer/Settings/Music" unique_id=2018973845]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer" unique_id=1444891687]
+layout_mode = 2
+text = "Muzyka"
+
+[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer" unique_id=459105840]
+layout_mode = 2
+
+[node name="Sounds" type="MarginContainer" parent="NinePatchRect/HBoxContainer/Settings" unique_id=2114484934]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_right = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect/HBoxContainer/Settings/Sounds" unique_id=995795680]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer" unique_id=603542579]
+layout_mode = 2
+text = "Dźwięki"
+
+[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer" unique_id=1875409290]
+layout_mode = 2
+
+[node name="ProjectInfo" type="VBoxContainer" parent="NinePatchRect/HBoxContainer" unique_id=1037297897]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+
+[node name="TilteText" type="Label" parent="NinePatchRect/HBoxContainer/ProjectInfo" unique_id=506330005]
+layout_mode = 2
+text = "O projekcie"
+label_settings = SubResource("LabelSettings_8egol")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect/HBoxContainer/ProjectInfo" unique_id=520504102]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="About" type="RichTextLabel" parent="NinePatchRect/HBoxContainer/ProjectInfo/ScrollContainer" unique_id=26500698]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+text = "Gra powstała w ramach projektu [color=darkblue]\"Zatrzymani Na Starcie\"[/color], zainicjowanego i zrealizowanego przez grupę młodzieży z Lublina i z mniejszych miejscowości.
+Projekt miał na celu naświetlić problem wykluczenia komunikacyjnego, z którym mierzy się ok. 30% młodzieży w Polsce.
+
+Projekt zrealizowaliśmy w ramach programu Europejski Korpus Solidarności.
+"
+
+[node name="CloseButton" type="Button" parent="NinePatchRect" unique_id=1198186177]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.85
+anchor_top = 0.132
+anchor_right = 0.8880001
+anchor_bottom = 0.24700001
+offset_left = -0.2000122
+offset_top = 0.1760025
+offset_right = -0.29608154
+offset_bottom = 0.2460022
+theme_override_colors/font_pressed_color = Color(1, 0.34901962, 0.4392157, 1)
+theme_override_colors/font_hover_color = Color(1, 0.68235296, 0.8156863, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 0.34901962, 0.4392157, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8egol")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_l0c5a")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qnvti")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_gi462")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1vhoq")
+text = "X"
+
+[connection signal="pressed" from="NinePatchRect/CloseButton" to="." method="_on_close_button_pressed"]

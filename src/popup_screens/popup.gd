@@ -17,10 +17,6 @@ func display_completion_time() -> void:
 	
 	%TimeLabel.text = "%02d:%02d" % [minutes, seconds]
 
-
 func _on_play_again_button_pressed() -> void:
-	print("RETURNING TO HUB...")
 	GameManager.main_scene.return_to_hub()
-	hide()
-	get_tree().create_timer(0.1).timeout
 	hide()
