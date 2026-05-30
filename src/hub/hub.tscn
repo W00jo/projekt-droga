@@ -205,7 +205,7 @@ music_player = NodePath("MusicPlayer")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1663058610]
 build_mode = 1
-polygon = PackedVector2Array(427, 285, 398, 286, 398, 306, 306, 306, 307, 559, 733, 561, 732, 460, 849, 460, 846, 222, 783.25525, 222, 783, 207, 546, 206, 546.1847, 222, 429, 222)
+polygon = PackedVector2Array(427, 285, 398, 286, 398, 306, 306, 306, 307, 559, 628, 561, 628, 460, 849, 460, 846, 222, 783.25525, 222, 783, 207, 546, 206, 546.1847, 222, 429, 222)
 
 [node name="SpriteHub" type="AnimatedSprite2D" parent="." unique_id=367206235]
 position = Vector2(576, 324)
