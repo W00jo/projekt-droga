@@ -40,29 +40,28 @@ var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.
 # Configuration for the spatial origin of the endless environment
 @export var environment_origin: Vector2 = Vector2(-209, 285)
 
-func start_run() -> void:
-	GameManager.change_state(GameManager.GameState.ACCELERATING)
+func _ready() -> void:
 	chunks_container.name = "Chunks"
 	chunks_container.position = environment_origin
 	chunks_container.scale = Vector2(CHUNK_SCALE, CHUNK_SCALE)
 	add_child(chunks_container)
 	
-	# Obstacles live at global scale (1.0) and origin (0,0)
-	# to avoid compounding the Obstacle scene's native scale
 	obstacles_container.name = "Obstacles"
 	add_child(obstacles_container)
 	
 	enemies_container.name = "Enemies"
 	add_child(enemies_container)
 	
+	GameManager.state_changed.connect(_on_state_changed)
+	
 	obstacle_spawner.level = self
 	enemy_spawner.level = self
 	GameManager.level = self
 	
 	_initialise_chunk_pool()
-	
-	#GameManager.state_changed.connect(_bus_arrive_sequence)
-	GameManager.state_changed.connect(_on_state_changed)
+
+func start_run() -> void:
+	GameManager.change_state(GameManager.GameState.ACCELERATING)
 
 func _process(delta: float) -> void:
 	if GameManager.current_state != GameManager.GameState.INACTIVE:
@@ -120,6 +119,9 @@ func _scroll_environment(delta: float) -> void:
 		bus_stop.position.x -= global_speed * delta
 
 func _on_state_changed(new_state: GameManager.GameState) -> void:
+	if new_state in [GameManager.GameState.DECELERATING, GameManager.GameState.FAILED]:
+		player.cancel_invincibility()
+			
 	if new_state == GameManager.GameState.DECELERATING:
 		_show_bus_stop()
 	elif new_state == GameManager.GameState.ARRIVED:
@@ -130,26 +132,63 @@ func _on_state_changed(new_state: GameManager.GameState) -> void:
 		lose_screen.show_popup_and_cursor()
 
 func _show_bus_stop() -> void:
-		bus_stop.visible = true
-		bus.visible = true
-		while player.current_track != 1:
-			player.force_track_change(player.current_track-1)
-			await get_tree().create_timer(0.3).timeout
-			if not is_instance_valid(self) or not is_inside_tree():
-				return
-
-func _bus_arrive_sequence() -> void:
-		player.sprite_animation.play("idle")
-		bus_animation.play("bus_arrive")
-		await bus_animation.animation_finished
+	bus_stop.visible = true
+	bus.visible = true
+	while player.current_track != 1:
+		player.force_track_change(player.current_track-1)
+		await get_tree().create_timer(0.3).timeout
 		if not is_instance_valid(self) or not is_inside_tree():
 			return
+
+func _bus_arrive_sequence() -> void:
+	player.sprite_animation.play("idle")
+	bus_animation.play("bus_arrive")
+	await bus_animation.animation_finished
+	if not is_instance_valid(self) or not is_inside_tree():
+		return
 		
-		player.visible = false
-		bus_animation.play("bus_depart")
-		await bus_animation.animation_finished
-		win_screen.show_popup_and_cursor()
-		win_screen.display_completion_time()
+	player.visible = false
+	bus_animation.play("bus_depart")
+	await bus_animation.animation_finished
+	win_screen.show_popup_and_cursor()
+	win_screen.display_completion_time()
+
+func _clear_poolable_entities() -> void:
+	# Iterate backwards to safely remove elements without invalidating the iterator
+	for i in range(active_obstacles.size() - 1, -1, -1):
+		PoolManager.release_instance("obstacle", active_obstacles[i])
+	active_obstacles.clear()
+	
+	for i in range(active_enemies.size() - 1, -1, -1):
+		var enemy: Dog = active_enemies[i] as Dog
+		enemy.current_state = Dog.DogState.INACTIVE # Force state manually to prevent state_changed signal from double-releasing
+		PoolManager.release_instance("dog", enemy)
+	active_enemies.clear()
+
+func _reset_environment() -> void:
+	BiomeManager.reset_biome()
+	
+	# Reposition and repaint existing chunks instead of queue_freeing to prevent memory allocations
+	for i in range(active_chunks.size()):
+		var chunk: ProceduralChunk = active_chunks[i]
+		chunk.position.x = i * (CHUNK_WIDTH_TILES * TILE_WIDTH_PX)
+		chunk.paint_chunk(BiomeManager.get_chunk_layout(CHUNK_WIDTH_TILES, TRACK_COUNT))
+
+func _reset_spawners() -> void:
+	obstacle_spawner.reset_spawner()
+	enemy_spawner.reset_spawner()
+
+func _reset_bus_sequence() -> void:
+	bus_stop.visible = false
+	bus_stop.position = Vector2(1571, 201)
+	bus.visible = false
+	bus.position = Vector2(-300, 268)
+	bus_animation.play("RESET")
 
 func reset_level() -> void:
-	pass
+	_clear_poolable_entities()
+	_reset_environment()
+	_reset_spawners()
+	_reset_bus_sequence()
+	
+	player.reset_player()

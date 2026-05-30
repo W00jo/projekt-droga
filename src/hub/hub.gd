@@ -7,6 +7,8 @@ extends StaticBody2D
  
 func reset_hub():
 	player.position = Vector2(560, 380)
+	player.last_direction = "down"
+	player.sprite.frame = 1
 	garage_door_sprite.frame = 0
 
 func _on_area_monitor_body_entered(body: Node2D) -> void:

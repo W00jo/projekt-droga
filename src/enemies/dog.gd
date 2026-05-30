@@ -50,6 +50,7 @@ const FLASH_ANIM_FINAL_SPEED: float = 7.0
 
 var _movement_tween_y_axis: Tween
 var _movement_tween_x_axis: Tween
+var _anim_tween: Tween
 
 func _ready() -> void:
 	add_child(delay_timer)
@@ -68,9 +69,12 @@ func start_approach_sequence() -> void:
 	position.y = level_manager.get_track_position_y(current_track)
 	z_index = current_track
 
+	if _anim_tween and _anim_tween.is_valid():
+		_anim_tween.kill()
+
 	warning_sprite.position.x = WARNING_START_POS_X
 	warning_sprite.visible = true
-	var _anim_tween: Tween = create_tween()
+	_anim_tween = create_tween()
 	animation.play("warning_flash")
 	_anim_tween.tween_property(animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, FLASH_ANIM_DURATION).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	await _anim_tween.finished
@@ -220,3 +224,20 @@ func change_state(new_state: DogState) -> void:
 
 func disable_collision() -> void: 
 	collision.set_deferred("disabled", true)
+
+func deactivate() -> void:
+	super()
+	if _movement_tween_x_axis and _movement_tween_x_axis.is_valid():
+		_movement_tween_x_axis.kill()
+	if _movement_tween_y_axis and _movement_tween_y_axis.is_valid():
+		_movement_tween_y_axis.kill()
+	if _anim_tween and _anim_tween.is_valid():
+		_anim_tween.kill()
+	
+	delay_timer.stop()
+	attack_cooldown.stop()
+	warning_sprite.visible = false
+	
+	animation.stop()
+	animation.play("RESET")
+	animation.advance(0)

@@ -57,6 +57,11 @@ func manage_spawner_active_time(current_state):
 	else:
 		spawn_timer.stop()
 
+# Clears the spawner's internal state to ensure consecutive runs start fresh
+func reset_spawner() -> void:
+	recently_used_tracks.clear()
+	spawn_timer.stop()
+
 func _spawn_obstacle():
 	var track_id: int = get_diversified_track_id()
 	var x_offset_to_right: int = 200

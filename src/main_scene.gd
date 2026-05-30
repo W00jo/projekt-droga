@@ -43,6 +43,7 @@ func return_to_hub() -> void:
 	level.music_player.stop()
 	hub.music_player.play()
 	
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	hub.show()
 	level.hide()
 	
@@ -50,3 +51,4 @@ func return_to_hub() -> void:
 	toggle_hub_player_movement(true)
 	
 	level.reset_level()
+	GameManager.reset_run()

@@ -1,17 +1,12 @@
 extends Control
 
-var run_time: float
-
-func _ready() -> void:
-	run_time = GameManager.current_time
-
 func show_popup_and_cursor() -> void:
 	show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func display_completion_time() -> void:
-	# Convert to integer once to avoid expensive floating-point modulo operations
-	var total_seconds: int = int(run_time - GameManager.current_time)
+	# Elapsed time = starting budget minus whatever remained on the clock at completion
+	var total_seconds: int = int(GameManager.STARTING_TIME - GameManager.current_time)
 	var minutes: int = total_seconds / 60
 	var seconds: int = total_seconds % 60
 	

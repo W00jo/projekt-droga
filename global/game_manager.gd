@@ -26,8 +26,11 @@ var current_scroll_speed: float = 0.0
 var target_scroll_speed: float = 600.0
 var acceleration_rate: float = 150.0
 
-var current_time: float = 300.0
-var current_currency: float = 50.0
+const STARTING_TIME: float = 300.0
+const STARTING_CURRENCY: float = 50.0
+
+var current_time: float = STARTING_TIME
+var current_currency: float = STARTING_CURRENCY
 
 # Conversion factor translating raw pixel speed into logical distance units (metres)
 # At target_scroll_speed = 400.0 px/s, the player covers 8.0 metres per second (400 / 50)
@@ -115,6 +118,24 @@ func deduct_currency(amount: float) -> void:
 	currency_updated.emit(current_currency)
 
 func deduct_time(amount: float) -> void:
+	# Prevent time deduction if the run has already concluded (e.g. during victory coasting)
+	if current_state not in [GameState.ACCELERATING, GameState.RUNNING]:
+		return
+		
 	current_time = max(0.0, current_time - amount)
 	time_updated.emit(current_time)
 	time_deducted.emit(amount)
+
+# Resets all run-specific tracking variables and emits signals so that
+# UI components reflect the fresh state before a consecutive run begins
+func reset_run() -> void:
+	current_time = STARTING_TIME
+	distance_travelled = 0.0
+	current_scroll_speed = 0.0
+	
+	speed_changed.emit(current_scroll_speed)
+	time_updated.emit(current_time)
+	distance_updated.emit(distance_travelled, target_distance)
+	progress_updated.emit(0.0)
+	
+	change_state(GameState.INACTIVE)

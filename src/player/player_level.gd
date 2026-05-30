@@ -74,6 +74,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					_move_to_track(current_track + 1)
 				_swipe_consumed = true
 
+var _invincibility_tween: Tween
+
 # Smoothly transitions the player from the current lane to the target lane
 func _move_to_track(target_track: int) -> void:
 	# Clamp to valid track range to prevent the player from leaving the roadway
@@ -107,14 +109,52 @@ func stun(stun_time: float) -> void:
 	
 # Makes the player invincible for a certain duration
 func invincibility(duration: float) -> void:
-	collision.set_deferred("disabled",true)
+	var state: GameManager.GameState = GameManager.current_state
+	if state in [GameManager.GameState.DECELERATING, GameManager.GameState.FAILED, GameManager.GameState.ARRIVED]:
+		return
+		
+	if _invincibility_tween and _invincibility_tween.is_valid():
+		_invincibility_tween.kill()
+		
+	collision.set_deferred("disabled", true)
 	invincibility_animation.speed_scale = 5.0
 	invincibility_animation.play("i_frame")
-	var _anim_tween: Tween = create_tween()
-	_anim_tween.tween_property(invincibility_animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
-	await _anim_tween.finished
+	_invincibility_tween = create_tween()
+	_invincibility_tween.tween_property(invincibility_animation, "speed_scale", FLASH_ANIM_FINAL_SPEED, duration).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	await _invincibility_tween.finished
 	if not is_instance_valid(self) or not is_inside_tree():
 		return
 
+	cancel_invincibility()
+
+func cancel_invincibility() -> void:
+	if _invincibility_tween and _invincibility_tween.is_valid():
+		_invincibility_tween.kill()
+	
 	invincibility_animation.stop()
-	collision.set_deferred("disabled",false)
+	# Applying the RESET animation manually immediately updates all tracks to default values
+	invincibility_animation.play("RESET")
+	invincibility_animation.advance(0)
+	
+	var state: GameManager.GameState = GameManager.current_state
+	if state not in [GameManager.GameState.DECELERATING, GameManager.GameState.FAILED, GameManager.GameState.ARRIVED]:
+		collision.set_deferred("disabled", false)
+
+# Fully resets the player's position, state, and cleans up any running tweens
+func reset_player() -> void:
+	if _movement_tween and _movement_tween.is_valid():
+		_movement_tween.kill()
+		
+	cancel_invincibility()
+
+	_swipe_active = false
+	_swipe_consumed = false
+	current_track = 2
+	position = Vector2(285, level_manager.get_track_position_y(current_track))
+	z_index = current_track + 1
+	stunned = false
+	visible = true
+	collision.set_deferred("disabled", false)
+	
+	sprite_animation.play("run")
+	sprite_animation.speed_scale = 1.0

@@ -23,6 +23,11 @@ func spawner_manage_active_time() -> void:
 			spawn_timer.start()
 	else:
 		spawn_timer.stop()
+
+# Clears the spawner's internal state to ensure consecutive runs start fresh
+func reset_spawner() -> void:
+	enemy_id_counter = 0
+	spawn_timer.stop()
 		
 func _spawn_enemy() -> void:
 	var new_enemy: PoolableEntity = PoolManager.get_instance("dog")

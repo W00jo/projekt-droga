@@ -16,8 +16,16 @@ var active_floating_texts: Array[Label] = []
 func _ready() -> void:
 	GameManager.time_updated.connect(_on_time_updated)
 	GameManager.time_deducted.connect(_on_time_deducted)
+	GameManager.state_changed.connect(_on_state_changed)
 	# Initialise the display immediately to prevent a single-frame blank state
 	_on_time_updated(GameManager.current_time)
+
+func _on_state_changed(new_state: GameManager.GameState) -> void:
+	if new_state == GameManager.GameState.INACTIVE:
+		for label in active_floating_texts:
+			if is_instance_valid(label):
+				label.queue_free()
+		active_floating_texts.clear()
 
 # Formats the raw float time into a human-readable MM:SS string
 func _on_time_updated(time_left: float) -> void:
