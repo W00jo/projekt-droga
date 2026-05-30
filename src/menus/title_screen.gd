@@ -15,10 +15,8 @@ func _transition_to_hub() -> void:
 	# Browsers require this to be triggered directly by a user interaction event
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	
-	SFXClickManager.play_click()
-	
 	# This signal is received by the main scene, which then enables hub player movement
-	emit_signal("title_screen_killed", true)
+	emit_signal("title_screen_killed")
 	
 	await get_tree().create_timer(0.15).timeout
 	queue_free()

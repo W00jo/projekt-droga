@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://dc525a8l77sam" path="res://src/menus/monitor_menu.gd" id="1_l0c5a"]
 [ext_resource type="Shader" uid="uid://cylqp104717ly" path="res://assets/blur.gdshader" id="1_xt015"]
 [ext_resource type="Texture2D" uid="uid://w45x53dwfjfa" path="res://src/menus/monitor_box.png" id="2_8egol"]
+[ext_resource type="AudioStream" uid="uid://dk1kg113opktp" path="res://assets/sfx/button_click.ogg" id="4_qnvti"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8egol"]
 shader = ExtResource("1_xt015")
@@ -21,9 +22,12 @@ font_size = 24
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vhoq"]
 
-[node name="MonitorMenu" type="CanvasLayer" unique_id=234380079]
+[node name="MonitorMenu" type="CanvasLayer" unique_id=234380079 node_paths=PackedStringArray("button_sound_player", "music_volume_slider", "sounds_volume_slider")]
 visible = false
 script = ExtResource("1_l0c5a")
+button_sound_player = NodePath("ButtonSFX")
+music_volume_slider = NodePath("NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer/MusicVolumeSlider")
+sounds_volume_slider = NodePath("NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer/SoundsVolumeSlider")
 
 [node name="Control" type="Control" parent="." unique_id=1381631743]
 layout_mode = 3
@@ -98,8 +102,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Muzyka"
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer" unique_id=459105840]
+[node name="MusicVolumeSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer" unique_id=459105840]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="Sounds" type="MarginContainer" parent="NinePatchRect/HBoxContainer/Settings" unique_id=2114484934]
 layout_mode = 2
@@ -113,8 +120,11 @@ layout_mode = 2
 layout_mode = 2
 text = "Dźwięki"
 
-[node name="HSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer" unique_id=1875409290]
+[node name="SoundsVolumeSlider" type="HSlider" parent="NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer" unique_id=1875409290]
 layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="ProjectInfo" type="VBoxContainer" parent="NinePatchRect/HBoxContainer" unique_id=1037297897]
 layout_mode = 2
@@ -165,4 +175,10 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_gi462")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_1vhoq")
 text = "X"
 
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="." unique_id=1951968323]
+stream = ExtResource("4_qnvti")
+bus = &"SFX"
+
+[connection signal="value_changed" from="NinePatchRect/HBoxContainer/Settings/Music/VBoxContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="NinePatchRect/HBoxContainer/Settings/Sounds/VBoxContainer/SoundsVolumeSlider" to="." method="_on_sounds_volume_slider_value_changed"]
 [connection signal="pressed" from="NinePatchRect/CloseButton" to="." method="_on_close_button_pressed"]

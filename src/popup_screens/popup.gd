@@ -18,5 +18,6 @@ func display_completion_time() -> void:
 	%TimeLabel.text = "%02d:%02d" % [minutes, seconds]
 
 func _on_play_again_button_pressed() -> void:
+	%ButtonSFX.play()
 	GameManager.main_scene.return_to_hub()
 	hide()

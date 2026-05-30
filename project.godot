@@ -20,12 +20,15 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/image="uid://bejxf528s4axx"
 config/icon="uid://5d3e2u0ho6fs"
 
+[audio]
+
+buses/default_bus_layout="uid://rawgqcw11a0n"
+
 [autoload]
 
 GameManager="*res://global/game_manager.gd"
 BiomeManager="*res://global/biome_manager.gd"
 PoolManager="*res://global/pool_manager.gd"
-SFXClickManager="*res://global/ui_audio_manager.gd"
 
 [debug]
 

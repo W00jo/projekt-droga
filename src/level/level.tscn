@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bp0tq61sph64a" path="res://src/environment/bus.png" id="8_ob0n7"]
 [ext_resource type="PackedScene" uid="uid://clhcx4fr1bwdi" path="res://src/popup_screens/win_screen.tscn" id="9_p6v4a"]
 [ext_resource type="PackedScene" uid="uid://6mon24qx7tjq" path="res://src/popup_screens/lose_screen.tscn" id="10_5suky"]
+[ext_resource type="AudioStream" uid="uid://dyu0fn7txvo15" path="res://assets/soundtrack/main_game.ogg" id="11_k5trb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ob0n7"]
 atlas = ExtResource("8_ob0n7")
@@ -132,7 +133,7 @@ _data = {
 &"bus_depart": SubResource("Animation_5suky")
 }
 
-[node name="Level" type="Node2D" unique_id=1874155512 node_paths=PackedStringArray("player", "bus_stop", "bus", "bus_animation", "win_screen", "lose_screen")]
+[node name="Level" type="Node2D" unique_id=1874155512 node_paths=PackedStringArray("player", "bus_stop", "bus", "bus_animation", "win_screen", "lose_screen", "music_player")]
 script = ExtResource("1_af42n")
 player = NodePath("PlayerLevel")
 bus_stop = NodePath("BusStop")
@@ -140,6 +141,7 @@ bus = NodePath("Bus")
 bus_animation = NodePath("BusAnimation")
 win_screen = NodePath("PopupLayer/WinScreen")
 lose_screen = NodePath("PopupLayer/LoseScreen")
+music_player = NodePath("MusicPlayer")
 
 [node name="BackgroundPlaceholder" type="Polygon2D" parent="." unique_id=2060795983]
 visible = false
@@ -186,3 +188,7 @@ visible = false
 
 [node name="LoseScreen" parent="PopupLayer" unique_id=762810705 instance=ExtResource("10_5suky")]
 visible = false
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1786458254]
+stream = ExtResource("11_k5trb")
+bus = &"Music"

@@ -5,13 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://ca5lhjggqcjex" path="res://src/level/level.tscn" id="2_hcawe"]
 [ext_resource type="PackedScene" uid="uid://dafxnrcnu7d16" path="res://src/level/level_transition.tscn" id="4_e1hn7"]
 [ext_resource type="PackedScene" uid="uid://cxjp7487wrc25" path="res://src/menus/title_screen.tscn" id="5_e1hn7"]
+[ext_resource type="AudioStream" uid="uid://dk1kg113opktp" path="res://assets/sfx/button_click.ogg" id="6_e1hn7"]
 
-[node name="MainScene" type="Node2D" unique_id=1091959245 node_paths=PackedStringArray("hub", "level", "transition_scene", "title_screen")]
+[node name="MainScene" type="Node2D" unique_id=1091959245 node_paths=PackedStringArray("hub", "level", "transition_scene", "title_screen", "title_screen_click_sfx")]
 script = ExtResource("1_vbj1a")
 hub = NodePath("Gameplay/Hub")
 level = NodePath("Gameplay/Level")
 transition_scene = NodePath("LevelTransition")
-title_screen = NodePath("UI/TitleScreen")
+title_screen = NodePath("TitleScreen/TitleScreen")
+title_screen_click_sfx = NodePath("TitleScreenClickSFX")
 
 [node name="Gameplay" type="Node2D" parent="." unique_id=237880273]
 
@@ -21,8 +23,12 @@ title_screen = NodePath("UI/TitleScreen")
 
 [node name="LevelTransition" parent="." unique_id=138945070 instance=ExtResource("4_e1hn7")]
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=2017875061]
+[node name="TitleScreen" type="CanvasLayer" parent="." unique_id=2017875061]
 
-[node name="TitleScreen" parent="UI" unique_id=1397022153 instance=ExtResource("5_e1hn7")]
+[node name="TitleScreen" parent="TitleScreen" unique_id=1397022153 instance=ExtResource("5_e1hn7")]
+
+[node name="TitleScreenClickSFX" type="AudioStreamPlayer" parent="." unique_id=331439958]
+stream = ExtResource("6_e1hn7")
+bus = &"SFX"
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

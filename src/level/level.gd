@@ -33,6 +33,7 @@ var active_enemies: Array[PoolableEntity] = []
 @export var bus_animation: AnimationPlayer 
 @export var win_screen: Control
 @export var lose_screen: Control
+@export var music_player: AudioStreamPlayer
 
 var chunk_scene: PackedScene = preload("res://src/level/chunks/procedural_chunk.tscn")
 

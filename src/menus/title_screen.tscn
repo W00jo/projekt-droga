@@ -41,7 +41,7 @@ _data = {
 &"pulse": SubResource("Animation_hkxjn")
 }
 
-[node name="TitleScreen" type="Control" unique_id=1397022153]
+[node name="TitleScreen" type="Control" unique_id=1397022153 node_paths=PackedStringArray("click_sound_player")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,6 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_r6esh")
+click_sound_player = NodePath("")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=599826247]
 layout_mode = 1

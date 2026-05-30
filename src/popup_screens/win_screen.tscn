@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://de63l0nq016ug" path="res://src/popup_screens/popup.gd" id="1_enkew"]
 [ext_resource type="Shader" uid="uid://cylqp104717ly" path="res://assets/blur.gdshader" id="1_sdsa0"]
 [ext_resource type="Texture2D" uid="uid://ddqsarxhon8we" path="res://src/popup_screens/popup_box.png" id="2_qtakq"]
+[ext_resource type="AudioStream" uid="uid://dk1kg113opktp" path="res://assets/sfx/button_click.ogg" id="4_0xbog"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtakq"]
 shader = ExtResource("1_sdsa0")
@@ -120,5 +121,10 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_waqix")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3fnoe")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_x80ns")
 text = "ZAGRAJ JESZCZE RAZ"
+
+[node name="ButtonSFX" type="AudioStreamPlayer" parent="." unique_id=83712803]
+unique_name_in_owner = true
+stream = ExtResource("4_0xbog")
+bus = &"SFX"
 
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
