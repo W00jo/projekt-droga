@@ -25,13 +25,13 @@ var attack_counter: int = 0
 
 const FOLLOWING_POS_X: float = 227.0
 const OFFSCREEN_POS_X: float = -200.0
-const MOVEMENT_DELAY: float = 0.4
+const MOVEMENT_DELAY: float = 0.25
 
 const ATTACK_LUNGE_DISTANCE: float = 120.0
 const ATTACK_LUNGE_DURATION: float = 0.3
 const ATTACK_COOLDOWN: float = 5.0
 const MAX_ATTACK_COUNT: int = 3
-const TIME_PENALTY: float = 15.0
+const TIME_PENALTY: float = 8.0
 const INVINCIBILITY_DURATION: float = 5.0
 
 const WARNING_START_POS_X: float = 300.0
@@ -205,7 +205,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 		player.invincibility(INVINCIBILITY_DURATION)
 		GameManager.deduct_time(TIME_PENALTY)
-		print("Player collided with enemy")
 
 	if area is Obstacle:
 		if _movement_tween_x_axis and _movement_tween_x_axis.is_running():
@@ -215,7 +214,6 @@ func _on_area_entered(area: Area2D) -> void:
 
 		animation.play("RESET")
 		change_state(DogState.DEFEATED)
-		print("Enemy collided with obstacle")
 
 func change_state(new_state: DogState) -> void:
 	if current_state != new_state:

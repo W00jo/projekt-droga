@@ -3,16 +3,19 @@
 class_name Obstacle
 extends PoolableEntity
 
-var assigned_track:int
+var assigned_track: int
+var is_tall: bool = false
 
 @export var sprite: Sprite2D
 @export var collision_shape: CollisionShape2D
 
-const INVINCIBILITY_DURATION: float = 3.0
+const INVINCIBILITY_DURATION: float = 1.0
+const TIME_PENALTY: float = 4.0
 
 # Applies all visual and physical properties from the given profile
 func setup_from_profile(profile: ObstacleProfile) -> void:
 	activate()
+	is_tall = profile.is_tall
 
 	sprite.texture = profile.texture_variants.pick_random()
 	sprite.scale = profile.sprite_scale
@@ -29,5 +32,4 @@ func disable_collision() -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area is Player:
 		area.invincibility(INVINCIBILITY_DURATION)
-		GameManager.deduct_time(10)
-		print("Player collided with obstacle")
+		GameManager.deduct_time(TIME_PENALTY)

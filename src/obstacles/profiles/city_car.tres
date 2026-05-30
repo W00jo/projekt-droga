@@ -16,3 +16,4 @@ sprite_offset = Vector2(0, -50)
 collision_shape = SubResource("RectangleShape2D_col")
 collision_offset = Vector2(0, -20)
 allowed_tracks = Array[int]([2, 3])
+is_tall = true

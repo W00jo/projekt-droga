@@ -59,9 +59,9 @@ func _process(_delta: float) -> void:
 # UI node has claimed will reach this function, preventing accidental lane
 # changes when the player taps a HUD button or interacts with the joystick
 func _unhandled_input(event: InputEvent) -> void:
-	# Block all input when the run has concluded or the player is stunned
+	# Block all input when the run has concluded, hasn't started (INACTIVE), or the player is stunned
 	var state: GameManager.GameState = GameManager.current_state
-	if state in [GameManager.GameState.DECELERATING, GameManager.GameState.FAILED, GameManager.GameState.ARRIVED] or stunned:
+	if state in [GameManager.GameState.INACTIVE, GameManager.GameState.DECELERATING, GameManager.GameState.FAILED, GameManager.GameState.ARRIVED] or stunned:
 		return
 
 	# Keyboard and gamepad: respond to mapped actions from the Input Map

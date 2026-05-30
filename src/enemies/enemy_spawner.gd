@@ -5,13 +5,12 @@ var level: LevelManager
 var spawn_timer: Timer = Timer.new()
 var enemy_id_counter: int = 0
 
-const MAX_WAIT_TIME: float = 6.0
-const MIN_WAIT_TIME: float = 2.0
+const MAX_WAIT_TIME: float = 12.0
+const MIN_WAIT_TIME: float = 6.0
 
 func _ready() -> void:
 	add_child(spawn_timer)
 	spawn_timer.timeout.connect(_spawn_enemy)
-	
 
 func _process(_delta: float) -> void:
 	spawner_manage_active_time()
@@ -35,7 +34,7 @@ func _spawn_enemy() -> void:
 	level.active_enemies.append(new_enemy)
 	if level.enemies_container:
 		level.enemies_container.add_child(new_enemy)
-		new_enemy.current_track = randi_range(1,level.TRACK_COUNT)
+		new_enemy.current_track = randi_range(1, level.TRACK_COUNT)
 		new_enemy.id = enemy_id_counter
 		enemy_id_counter += 1
 		new_enemy.start_approach_sequence()

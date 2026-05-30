@@ -26,20 +26,20 @@ var current_scroll_speed: float = 0.0
 var target_scroll_speed: float = 600.0
 var acceleration_rate: float = 150.0
 
-const STARTING_TIME: float = 300.0
+const STARTING_TIME: float = 105.0
 const STARTING_CURRENCY: float = 50.0
 
 var current_time: float = STARTING_TIME
 var current_currency: float = STARTING_CURRENCY
 
 # Conversion factor translating raw pixel speed into logical distance units (metres)
-# At target_scroll_speed = 400.0 px/s, the player covers 8.0 metres per second (400 / 50)
-# 8.0 m/s equals roughly 28.8 km/h, approximating realistic human sprinting speed
+# At target_scroll_speed = 600.0 px/s, the player covers 12.0 metres per second (600 / 50)
+# 12.0 m/s equals roughly 43.2 km/h, approximating a fast sprint
 const PIXELS_PER_METRE: float = 50.0
 
 var distance_travelled: float = 0.0
 # The required distance (in logical distance units/metres) to reach the bus stop and complete the run
-var target_distance: float = 300.0
+var target_distance: float = 1080.0
 
 var main_scene: MainScene
 
@@ -52,14 +52,24 @@ func _process(delta: float) -> void:
 func _process_time(delta: float) -> void:
 	# Only count down time during an active run; the clock is frozen once
 	# the player has won (DECELERATING) or lost (FAILED)
-	if current_state in [GameState.ACCELERATING, GameState.RUNNING]:
+	if current_state == GameState.RUNNING:
 		if current_time > 0.0:
 			current_time = max(0.0, current_time - delta)
 			time_updated.emit(current_time)
 
-		# Failure condition: the timer has expired before the player covered
-		# the required distance, meaning the bus was not reached in time
-		if current_time <= 0.0 and distance_travelled < target_distance:
+		# Early failure condition: the timer has dropped below the minimum time required
+		# to physically reach the target distance at maximum speed
+		var distance_remaining: float = target_distance - distance_travelled
+		var speed_mps: float = target_scroll_speed / PIXELS_PER_METRE
+		var minimum_time_required: float = distance_remaining / speed_mps
+		
+		if current_time < minimum_time_required:
+			current_time = 0.0
+			time_updated.emit(current_time)
+			change_state(GameState.FAILED)
+			
+		# Standard failure condition just in case
+		elif current_time <= 0.0 and distance_travelled < target_distance:
 			change_state(GameState.FAILED)
 
 func _handle_movement_state(delta: float) -> void:
@@ -85,7 +95,7 @@ func _handle_movement_state(delta: float) -> void:
 			change_state(GameState.DECELERATING)
 
 		GameState.DECELERATING:
-			current_scroll_speed = move_toward(current_scroll_speed, 0.0, (acceleration_rate) * delta)
+			current_scroll_speed = move_toward(current_scroll_speed, 0.0, acceleration_rate * delta)
 			speed_changed.emit(current_scroll_speed)
 			if is_equal_approx(current_scroll_speed, 0.0):
 				change_state(GameState.ARRIVED)
@@ -118,8 +128,8 @@ func deduct_currency(amount: float) -> void:
 	currency_updated.emit(current_currency)
 
 func deduct_time(amount: float) -> void:
-	# Prevent time deduction if the run has already concluded (e.g. during victory coasting)
-	if current_state not in [GameState.ACCELERATING, GameState.RUNNING]:
+	# Prevent time deduction outside the active run phase
+	if current_state != GameState.RUNNING:
 		return
 		
 	current_time = max(0.0, current_time - amount)

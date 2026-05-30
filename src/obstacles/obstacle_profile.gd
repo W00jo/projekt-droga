@@ -21,3 +21,6 @@ extends Resource
 
 # Tracks (1-indexed) where this obstacle is allowed to spawn (e.g., [2, 3] for cars on the road)
 @export var allowed_tracks: Array[int] = [1, 2, 3, 4]
+
+# Determines if the obstacle is tall enough to obscure smaller obstacles above it
+@export var is_tall: bool = false
